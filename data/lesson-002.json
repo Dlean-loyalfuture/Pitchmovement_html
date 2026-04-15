@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "1.0.0",
+  "lessonId": "lesson-001",
+  "title": "Pitch movement in English",
+  "instructions": "Press <strong>Play all</strong> to hear the full passage, or <strong>click any thought group</strong> to hear just that part. The contour draws in sync as the audio plays.",
+  "ui": {
+    "showLegend": true,
+    "showGroupLabels": true,
+    "showMovementLabels": true
+  },
+  "sentences": [
+    {
+      "sentenceId": "s1",
+      "order": 1,
+      "badge": "S1",
+      "text": "When we started the project we didn't expect it would be this difficult.",
+      "audio": {
+        "src": "audio/s1.mp3",
+        "duration": 4.2
+      },
+      "thoughtGroups": [
+        {
+          "groupId": "s1-g1",
+          "index": 0,
+          "text": "When we started the project",
+          "start": 0.0,
+          "end": 1.4,
+          "pauseAfter": 0.1,
+          "pitchMovement": {
+            "label": "rising",
+            "line": { "startY": 0.78, "endY": 0.18 }
+          }
+        },
+        {
+          "groupId": "s1-g2",
+          "index": 1,
+          "text": "we didn't expect",
+          "start": 1.4,
+          "end": 2.6,
+          "pauseAfter": 0.05,
+          "pitchMovement": {
+            "label": "level",
+            "line": { "startY": 0.22, "endY": 0.26 }
+          }
+        },
+        {
+          "groupId": "s1-g3",
+          "index": 2,
+          "text": "it would be this difficult.",
+          "start": 2.6,
+          "end": 4.2,
+          "pauseAfter": 0.0,
+          "pitchMovement": {
+            "label": "falling",
+            "line": { "startY": 0.28, "endY": 0.88 }
+          }
+        }
+      ]
+    },
+    {
+      "sentenceId": "s2",
+      "order": 2,
+      "badge": "S2",
+      "text": "The deadline kept moving and the team was exhausted but we kept going.",
+      "audio": {
+        "src": "audio/s2.mp3",
+        "duration": 4.5
+      },
+      "thoughtGroups": [
+        {
+          "groupId": "s2-g1",
+          "index": 0,
+          "text": "The deadline kept moving",
+          "start": 0.0,
+          "end": 1.5,
+          "pauseAfter": 0.1,
+          "pitchMovement": {
+            "label": "rising",
+            "line": { "startY": 0.72, "endY": 0.20 }
+          }
+        },
+        {
+          "groupId": "s2-g2",
+          "index": 1,
+          "text": "and the team was exhausted",
+          "start": 1.5,
+          "end": 3.0,
+          "pauseAfter": 0.1,
+          "pitchMovement": {
+            "label": "level",
+            "line": { "startY": 0.24, "endY": 0.30 }
+          }
+        },
+        {
+          "groupId": "s2-g3",
+          "index": 2,
+          "text": "but we kept going.",
+          "start": 3.0,
+          "end": 4.5,
+          "pauseAfter": 0.0,
+          "pitchMovement": {
+            "label": "falling",
+            "line": { "startY": 0.32, "endY": 0.90 }
+          }
+        }
+      ]
+    },
+    {
+      "sentenceId": "s3",
+      "order": 3,
+      "badge": "S3",
+      "text": "Looking back now I think we learned a lot and I'm glad we didn't give up.",
+      "audio": {
+        "src": "audio/s3.mp3",
+        "duration": 5.0
+      },
+      "thoughtGroups": [
+        {
+          "groupId": "s3-g1",
+          "index": 0,
+          "text": "Looking back now",
+          "start": 0.0,
+          "end": 1.2,
+          "pauseAfter": 0.1,
+          "pitchMovement": {
+            "label": "rising",
+            "line": { "startY": 0.80, "endY": 0.22 }
+          }
+        },
+        {
+          "groupId": "s3-g2",
+          "index": 1,
+          "text": "I think we learned a lot",
+          "start": 1.2,
+          "end": 3.0,
+          "pauseAfter": 0.1,
+          "pitchMovement": {
+            "label": "level",
+            "line": { "startY": 0.26, "endY": 0.22 }
+          }
+        },
+        {
+          "groupId": "s3-g3",
+          "index": 2,
+          "text": "and I'm glad we didn't give up.",
+          "start": 3.0,
+          "end": 5.0,
+          "pauseAfter": 0.0,
+          "pitchMovement": {
+            "label": "falling",
+            "line": { "startY": 0.26, "endY": 0.94 }
+          }
+        }
+      ]
+    }
+  ]
+}

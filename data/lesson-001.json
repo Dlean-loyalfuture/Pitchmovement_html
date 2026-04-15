@@ -1,0 +1,594 @@
+{
+  "schemaVersion": "1.1.0",
+  "lessonId": "lesson-001",
+  "title": "Pitch movement in English",
+  "sentences": [
+    {
+      "sentenceId": "s1",
+      "badge": "S1",
+      "groups": [
+        {
+          "groupId": "s1-g1",
+          "index": 0,
+          "text": "I will now",
+          "audio": {
+            "src": "segments/s1-g1.wav",
+            "duration": 0.62
+          },
+          "pitchMovement": {
+            "label": "rising",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even as you move to the next idea.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.635
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.068
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s1-g2",
+          "index": 1,
+          "text": "pose a couple of questions",
+          "audio": {
+            "src": "segments/s1-g2.wav",
+            "duration": 1.621
+          },
+          "pitchMovement": {
+            "label": "rising",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even as you introduce the questions.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.516
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.245
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s1-g3",
+          "index": 2,
+          "text": "to which",
+          "audio": {
+            "src": "segments/s1-g3.wav",
+            "duration": 0.64
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice smooth as you connect to the next idea.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.624
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.616
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s1-g4",
+          "index": 3,
+          "text": "I would love to have a",
+          "audio": {
+            "src": "segments/s1-g4.wav",
+            "duration": 0.841
+          },
+          "pitchMovement": {
+            "label": "falling",
+            "reason": "The voice falls at the end, which makes the idea sound complete and clear. Let your voice come down on 'have a' to signal this part is finished.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.636
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.927
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s1-g5",
+          "index": 4,
+          "text": "very honest answer",
+          "audio": {
+            "src": "segments/s1-g5.wav",
+            "duration": 1.261
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The voice stays fairly level at the end, making the phrase sound steady and neutral. Let your pitch flow smoothly without forcing a strong rise or fall.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.833
+              },
+              {
+                "role": "peak",
+                "x": 0.302,
+                "y": 0.035
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.441
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s1-g6",
+          "index": 5,
+          "text": "just by a show of hands.",
+          "audio": {
+            "src": "segments/s1-g6.wav",
+            "duration": 1.481
+          },
+          "pitchMovement": {
+            "label": "falling",
+            "reason": "The voice falls at the end, which makes the idea sound complete and clear. Let your voice come down on 'hands' to signal you're done.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.145
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 1.0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sentenceId": "s2",
+      "badge": "S2",
+      "groups": [
+        {
+          "groupId": "s2-g1",
+          "index": 0,
+          "text": "No worries,",
+          "audio": {
+            "src": "segments/s2-g1.wav",
+            "duration": 0.58
+          },
+          "pitchMovement": {
+            "label": "rising",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even to sound calm and connect smoothly to the next part.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.676
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.48
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s2-g2",
+          "index": 1,
+          "text": "no one will judge you",
+          "audio": {
+            "src": "segments/s2-g2.wav",
+            "duration": 0.801
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even to connect smoothly to the next idea.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.7
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.876
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s2-g3",
+          "index": 2,
+          "text": "for it.",
+          "audio": {
+            "src": "segments/s2-g3.wav",
+            "duration": 0.34
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice calm and even to sound reassuring.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.9
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.9
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sentenceId": "s3",
+      "badge": "S3",
+      "groups": [
+        {
+          "groupId": "s3-g1",
+          "index": 0,
+          "text": "The first question",
+          "audio": {
+            "src": "segments/s3-g1.wav",
+            "duration": 0.8
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The voice stays fairly level at the end, making this sound like a clear introduction to the next idea. Let your pitch change slightly inside the group to highlight 'first'.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.521
+              },
+              {
+                "role": "peak",
+                "x": 0.312,
+                "y": 0.0
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.223
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s3-g2",
+          "index": 1,
+          "text": "is,",
+          "audio": {
+            "src": "segments/s3-g2.wav",
+            "duration": 0.16
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. This helps connect smoothly to the next part of the question.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.349
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.391
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s3-g3",
+          "index": 2,
+          "text": "who of you",
+          "audio": {
+            "src": "segments/s3-g3.wav",
+            "duration": 0.68
+          },
+          "pitchMovement": {
+            "label": "falling",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even as you ask this part of the question.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.0
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.941
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s3-g4",
+          "index": 3,
+          "text": "has thought",
+          "audio": {
+            "src": "segments/s3-g4.wav",
+            "duration": 0.76
+          },
+          "pitchMovement": {
+            "label": "falling",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even here to connect smoothly to the next part.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.717
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.996
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s3-g5",
+          "index": 4,
+          "text": "within the past week",
+          "audio": {
+            "src": "segments/s3-g5.wav",
+            "duration": 1.321
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The voice stays fairly level at the end, so the phrase sounds steady and leads into the next idea. Notice a slight pitch change inside the group to highlight the time frame.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.712
+              },
+              {
+                "role": "peak",
+                "x": 0.557,
+                "y": 0.343
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.898
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s3-g6",
+          "index": 5,
+          "text": "about whether or not",
+          "audio": {
+            "src": "segments/s3-g6.wav",
+            "duration": 1.401
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The voice stays fairly level at the end, so the phrase sounds steady and leads into the next idea. Notice a slight pitch change inside the group to keep it natural.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.744
+              },
+              {
+                "role": "peak",
+                "x": 0.612,
+                "y": 0.0
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.964
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s3-g7",
+          "index": 6,
+          "text": "you are an emotionally intelligent",
+          "audio": {
+            "src": "segments/s3-g7.wav",
+            "duration": 1.941
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even as you lead into the next idea.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.872
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.988
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s3-g8",
+          "index": 7,
+          "text": "person?",
+          "audio": {
+            "src": "segments/s3-g8.wav",
+            "duration": 0.461
+          },
+          "pitchMovement": {
+            "label": "falling",
+            "reason": "The voice falls at the end, which makes the idea sound complete and clear.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.879
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 1.0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sentenceId": "s4",
+      "badge": "S4",
+      "groups": [
+        {
+          "groupId": "s4-g1",
+          "index": 0,
+          "text": "Now that you think of it,",
+          "audio": {
+            "src": "segments/s4-g1.wav",
+            "duration": 1.081
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The ending stays fairly level, but there is a noticeable pitch change inside the group. This helps set up the question that follows, so keep your voice steady and clear.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.413
+              },
+              {
+                "role": "peak",
+                "x": 0.703,
+                "y": 0.0
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.959
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s4-g2",
+          "index": 1,
+          "text": "Would you consider yourself emotionally intelligent?",
+          "audio": {
+            "src": "segments/s4-g2.wav",
+            "duration": 2.842
+          },
+          "pitchMovement": {
+            "label": "rising",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even to sound calm and open-ended.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.731
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.257
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sentenceId": "s5",
+      "badge": "S5",
+      "groups": [
+        {
+          "groupId": "s5-g1",
+          "index": 0,
+          "text": "Please raise your hand",
+          "audio": {
+            "src": "segments/s5-g1.wav",
+            "duration": 0.84
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The ending stays fairly level, but there is a noticeable pitch change inside the group. This helps highlight the request while keeping it polite and connected to what follows.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.447
+              },
+              {
+                "role": "trough",
+                "x": 0.585,
+                "y": 1.0
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.987
+              }
+            ]
+          }
+        },
+        {
+          "groupId": "s5-g2",
+          "index": 1,
+          "text": "if you do so.",
+          "audio": {
+            "src": "segments/s5-g2.wav",
+            "duration": 4.923
+          },
+          "pitchMovement": {
+            "label": "level",
+            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even to signal a calm, complete thought.",
+            "points": [
+              {
+                "role": "start",
+                "x": 0.0,
+                "y": 0.444
+              },
+              {
+                "role": "end",
+                "x": 1.0,
+                "y": 0.649
+              }
+            ]
+          }
+        }
+      ]
+    }
+   
+    
+  ]
+}

@@ -1,0 +1,1659 @@
+{
+  "full_text": "",
+  "groups": [
+    {
+      "group_id": "g1",
+      "index": 0,
+      "text": "I will now",
+      "start": 4.937,
+      "end": 5.557,
+      "pause_after": 0.361,
+      "word_count": 3,
+      "start_word_idx": 0,
+      "end_word_idx": 2,
+      "words": [
+        {
+          "word": "I",
+          "start": 4.937,
+          "end": 4.997
+        },
+        {
+          "word": "will",
+          "start": 5.017,
+          "end": 5.217
+        },
+        {
+          "word": "now",
+          "start": 5.277,
+          "end": 5.557
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Natural introductory phrase with clear pause.",
+      "audio": {
+        "src": "segments/g1.wav",
+        "duration": 0.62
+      },
+      "pitchMovement": {
+        "label": "rising",
+        "line": {
+          "startY": 0.636,
+          "endY": 0.129
+        },
+        "acoustics": {
+          "f0Min": 231.185,
+          "f0Max": 333.166,
+          "f0Mean": 271.208,
+          "f0Start": 241.688,
+          "f0End": 321.164,
+          "voicedCount": 62
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.361
+      }
+    },
+    {
+      "group_id": "g2",
+      "index": 1,
+      "text": "pose a couple of questions",
+      "start": 5.918,
+      "end": 7.539,
+      "pause_after": 0.36,
+      "word_count": 5,
+      "start_word_idx": 3,
+      "end_word_idx": 7,
+      "words": [
+        {
+          "word": "pose",
+          "start": 5.918,
+          "end": 6.258
+        },
+        {
+          "word": "a",
+          "start": 6.318,
+          "end": 6.358
+        },
+        {
+          "word": "couple",
+          "start": 6.398,
+          "end": 6.658
+        },
+        {
+          "word": "of",
+          "start": 6.698,
+          "end": 6.778
+        },
+        {
+          "word": "questions",
+          "start": 6.898,
+          "end": 7.539
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Complete noun phrase suitable for pitch movement.",
+      "audio": {
+        "src": "segments/g2.wav",
+        "duration": 1.621
+      },
+      "pitchMovement": {
+        "label": "rising",
+        "line": {
+          "startY": 0.515,
+          "endY": 0.179
+        },
+        "acoustics": {
+          "f0Min": 213.518,
+          "f0Max": 324.095,
+          "f0Mean": 266.785,
+          "f0Start": 260.636,
+          "f0End": 313.387,
+          "voicedCount": 104
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.36
+      }
+    },
+    {
+      "group_id": "g3",
+      "index": 2,
+      "text": "to which I would love",
+      "start": 7.899,
+      "end": 9.04,
+      "pause_after": 0.04,
+      "word_count": 5,
+      "start_word_idx": 8,
+      "end_word_idx": 12,
+      "words": [
+        {
+          "word": "to",
+          "start": 7.899,
+          "end": 8.159
+        },
+        {
+          "word": "which",
+          "start": 8.359,
+          "end": 8.539
+        },
+        {
+          "word": "I",
+          "start": 8.599,
+          "end": 8.639
+        },
+        {
+          "word": "would",
+          "start": 8.679,
+          "end": 8.82
+        },
+        {
+          "word": "love",
+          "start": 8.86,
+          "end": 9.04
+        }
+      ],
+      "llm_decision": "revise",
+      "llm_reason": "Clause 'to which I would love' forms a coherent unit.",
+      "audio": {
+        "src": "segments/g3.wav",
+        "duration": 1.141
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.631,
+          "endY": 0.734
+        },
+        "acoustics": {
+          "f0Min": 205.26,
+          "f0Max": 299.659,
+          "f0Mean": 239.13,
+          "f0Start": 242.514,
+          "f0End": 226.289,
+          "voicedCount": 95
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.04
+      }
+    },
+    {
+      "group_id": "g4",
+      "index": 3,
+      "text": "to have a",
+      "start": 9.08,
+      "end": 9.44,
+      "pause_after": 0.06,
+      "word_count": 3,
+      "start_word_idx": 13,
+      "end_word_idx": 15,
+      "words": [
+        {
+          "word": "to",
+          "start": 9.08,
+          "end": 9.16
+        },
+        {
+          "word": "have",
+          "start": 9.22,
+          "end": 9.38
+        },
+        {
+          "word": "a",
+          "start": 9.42,
+          "end": 9.44
+        }
+      ],
+      "llm_decision": "split",
+      "llm_reason": "Overly long; split into two natural clauses for better phrasing.",
+      "audio": {
+        "src": "segments/g4.wav",
+        "duration": 0.36
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.721,
+          "endY": 0.863
+        },
+        "acoustics": {
+          "f0Min": 190.455,
+          "f0Max": 251.612,
+          "f0Mean": 216.15,
+          "f0Start": 228.403,
+          "f0End": 206.043,
+          "voicedCount": 33
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.06
+      }
+    },
+    {
+      "group_id": "g5",
+      "index": 4,
+      "text": "very honest answer",
+      "start": 9.5,
+      "end": 10.761,
+      "pause_after": 0.26,
+      "word_count": 3,
+      "start_word_idx": 16,
+      "end_word_idx": 18,
+      "words": [
+        {
+          "word": "very",
+          "start": 9.5,
+          "end": 9.76
+        },
+        {
+          "word": "honest",
+          "start": 9.82,
+          "end": 10.16
+        },
+        {
+          "word": "answer",
+          "start": 10.34,
+          "end": 10.761
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Adjective-noun phrase with medium pause.",
+      "audio": {
+        "src": "segments/g5.wav",
+        "duration": 1.261
+      },
+      "pitchMovement": {
+        "label": "rising",
+        "line": {
+          "startY": 0.8,
+          "endY": 0.472
+        },
+        "acoustics": {
+          "f0Min": 118.832,
+          "f0Max": 341.873,
+          "f0Mean": 221.487,
+          "f0Start": 215.974,
+          "f0End": 267.409,
+          "voicedCount": 97
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.26
+      }
+    },
+    {
+      "group_id": "g6",
+      "index": 5,
+      "text": "just by a show of hands.",
+      "start": 11.021,
+      "end": 12.502,
+      "pause_after": 1.181,
+      "word_count": 6,
+      "start_word_idx": 19,
+      "end_word_idx": 24,
+      "words": [
+        {
+          "word": "just",
+          "start": 11.021,
+          "end": 11.241
+        },
+        {
+          "word": "by",
+          "start": 11.361,
+          "end": 11.521
+        },
+        {
+          "word": "a",
+          "start": 11.561,
+          "end": 11.601
+        },
+        {
+          "word": "show",
+          "start": 11.641,
+          "end": 11.861
+        },
+        {
+          "word": "of",
+          "start": 11.921,
+          "end": 12.002
+        },
+        {
+          "word": "hands.",
+          "start": 12.082,
+          "end": 12.502
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Complete prepositional phrase ending sentence.",
+      "audio": {
+        "src": "segments/g6.wav",
+        "duration": 1.481
+      },
+      "pitchMovement": {
+        "label": "falling",
+        "line": {
+          "startY": 0.161,
+          "endY": 1.0
+        },
+        "acoustics": {
+          "f0Min": 95.56,
+          "f0Max": 340.315,
+          "f0Mean": 226.115,
+          "f0Start": 316.273,
+          "f0End": 170.138,
+          "voicedCount": 91
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 1.181
+      }
+    },
+    {
+      "group_id": "g7",
+      "index": 6,
+      "text": "No worries,",
+      "start": 13.683,
+      "end": 14.263,
+      "pause_after": 0.28,
+      "word_count": 2,
+      "start_word_idx": 25,
+      "end_word_idx": 26,
+      "words": [
+        {
+          "word": "No",
+          "start": 13.683,
+          "end": 13.823
+        },
+        {
+          "word": "worries,",
+          "start": 13.843,
+          "end": 14.263
+        }
+      ],
+      "llm_decision": "merge",
+      "llm_reason": "Too fragmented; merge with next group for natural flow.",
+      "audio": {
+        "src": "segments/g7.wav",
+        "duration": 0.58
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.677,
+          "endY": 0.416
+        },
+        "acoustics": {
+          "f0Min": 227.567,
+          "f0Max": 280.536,
+          "f0Mean": 252.492,
+          "f0Start": 235.273,
+          "f0End": 276.266,
+          "voicedCount": 48
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.28
+      }
+    },
+    {
+      "group_id": "g8",
+      "index": 7,
+      "text": "no one will judge you for it.",
+      "start": 14.543,
+      "end": 15.724,
+      "pause_after": 1.081,
+      "word_count": 7,
+      "start_word_idx": 27,
+      "end_word_idx": 33,
+      "words": [
+        {
+          "word": "no",
+          "start": 14.543,
+          "end": 14.683
+        },
+        {
+          "word": "one",
+          "start": 14.763,
+          "end": 14.843
+        },
+        {
+          "word": "will",
+          "start": 14.863,
+          "end": 15.003
+        },
+        {
+          "word": "judge",
+          "start": 15.043,
+          "end": 15.224
+        },
+        {
+          "word": "you",
+          "start": 15.244,
+          "end": 15.344
+        },
+        {
+          "word": "for",
+          "start": 15.384,
+          "end": 15.564
+        },
+        {
+          "word": "it.",
+          "start": 15.644,
+          "end": 15.724
+        }
+      ],
+      "llm_decision": "revise",
+      "llm_reason": "Full sentence 'No worries, no one will judge you for it.' as single unit.",
+      "audio": {
+        "src": "segments/g8.wav",
+        "duration": 1.181
+      },
+      "pitchMovement": {
+        "label": "fall-rise",
+        "line": {
+          "startY": 0.896,
+          "endY": 0.192
+        },
+        "acoustics": {
+          "f0Min": 75.938,
+          "f0Max": 327.989,
+          "f0Mean": 211.367,
+          "f0Start": 200.972,
+          "f0End": 311.41,
+          "voicedCount": 80
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 1.081
+      }
+    },
+    {
+      "group_id": "g9",
+      "index": 8,
+      "text": "The first question",
+      "start": 16.805,
+      "end": 17.605,
+      "pause_after": 0.22,
+      "word_count": 3,
+      "start_word_idx": 34,
+      "end_word_idx": 36,
+      "words": [
+        {
+          "word": "The",
+          "start": 16.805,
+          "end": 16.905
+        },
+        {
+          "word": "first",
+          "start": 16.945,
+          "end": 17.145
+        },
+        {
+          "word": "question",
+          "start": 17.225,
+          "end": 17.605
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Noun phrase with medium pause.",
+      "audio": {
+        "src": "segments/g9.wav",
+        "duration": 0.8
+      },
+      "pitchMovement": {
+        "label": "rise-fall",
+        "line": {
+          "startY": 0.537,
+          "endY": 0.302
+        },
+        "acoustics": {
+          "f0Min": 229.068,
+          "f0Max": 407.079,
+          "f0Mean": 316.862,
+          "f0Start": 257.225,
+          "f0End": 294.157,
+          "voicedCount": 49
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.22
+      }
+    },
+    {
+      "group_id": "g10",
+      "index": 9,
+      "text": "is,",
+      "start": 17.825,
+      "end": 17.985,
+      "pause_after": 1.001,
+      "word_count": 1,
+      "start_word_idx": 37,
+      "end_word_idx": 37,
+      "words": [
+        {
+          "word": "is,",
+          "start": 17.825,
+          "end": 17.985
+        }
+      ],
+      "llm_decision": "revise",
+      "llm_reason": "Combined 'The first question is,' as introductory phrase.",
+      "audio": {
+        "src": "segments/g10.wav",
+        "duration": 0.16
+      },
+      "pitchMovement": {
+        "label": "rising",
+        "line": {
+          "startY": 0.392,
+          "endY": 0.392
+        },
+        "acoustics": {
+          "f0Min": 266.846,
+          "f0Max": 280.682,
+          "f0Mean": 276.307,
+          "f0Start": 280.016,
+          "f0End": 279.992,
+          "voicedCount": 15
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 1.001
+      }
+    },
+    {
+      "group_id": "g11",
+      "index": 10,
+      "text": "who of you",
+      "start": 18.986,
+      "end": 19.666,
+      "pause_after": 0.421,
+      "word_count": 3,
+      "start_word_idx": 38,
+      "end_word_idx": 40,
+      "words": [
+        {
+          "word": "who",
+          "start": 18.986,
+          "end": 19.166
+        },
+        {
+          "word": "of",
+          "start": 19.226,
+          "end": 19.306
+        },
+        {
+          "word": "you",
+          "start": 19.386,
+          "end": 19.666
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Question start with strong pause.",
+      "audio": {
+        "src": "segments/g11.wav",
+        "duration": 0.68
+      },
+      "pitchMovement": {
+        "label": "falling",
+        "line": {
+          "startY": 0.0,
+          "endY": 0.889
+        },
+        "acoustics": {
+          "f0Min": 193.366,
+          "f0Max": 367.428,
+          "f0Mean": 289.598,
+          "f0Start": 362.143,
+          "f0End": 201.974,
+          "voicedCount": 63
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.421
+      }
+    },
+    {
+      "group_id": "g12",
+      "index": 11,
+      "text": "has thought",
+      "start": 20.087,
+      "end": 20.847,
+      "pause_after": 0.4,
+      "word_count": 2,
+      "start_word_idx": 41,
+      "end_word_idx": 42,
+      "words": [
+        {
+          "word": "has",
+          "start": 20.087,
+          "end": 20.287
+        },
+        {
+          "word": "thought",
+          "start": 20.447,
+          "end": 20.847
+        }
+      ],
+      "llm_decision": "merge",
+      "llm_reason": "Too fragmented; merge with next group for verb phrase.",
+      "audio": {
+        "src": "segments/g12.wav",
+        "duration": 0.76
+      },
+      "pitchMovement": {
+        "label": "rise-fall",
+        "line": {
+          "startY": 0.73,
+          "endY": 1.0
+        },
+        "acoustics": {
+          "f0Min": 176.956,
+          "f0Max": 256.254,
+          "f0Mean": 202.353,
+          "f0Start": 227.031,
+          "f0End": 182.605,
+          "voicedCount": 44
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.4
+      }
+    },
+    {
+      "group_id": "g13",
+      "index": 12,
+      "text": "within the past week",
+      "start": 21.247,
+      "end": 22.568,
+      "pause_after": 0.981,
+      "word_count": 4,
+      "start_word_idx": 43,
+      "end_word_idx": 46,
+      "words": [
+        {
+          "word": "within",
+          "start": 21.247,
+          "end": 21.548
+        },
+        {
+          "word": "the",
+          "start": 21.588,
+          "end": 21.668
+        },
+        {
+          "word": "past",
+          "start": 21.728,
+          "end": 22.108
+        },
+        {
+          "word": "week",
+          "start": 22.228,
+          "end": 22.568
+        }
+      ],
+      "llm_decision": "revise",
+      "llm_reason": "Verb phrase 'has thought within the past week' as single unit.",
+      "audio": {
+        "src": "segments/g13.wav",
+        "duration": 1.321
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.707,
+          "endY": 0.956
+        },
+        "acoustics": {
+          "f0Min": 186.617,
+          "f0Max": 288.647,
+          "f0Mean": 240.262,
+          "f0Start": 230.545,
+          "f0End": 191.516,
+          "voicedCount": 89
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.981
+      }
+    },
+    {
+      "group_id": "g14",
+      "index": 13,
+      "text": "about whether or not",
+      "start": 23.549,
+      "end": 24.95,
+      "pause_after": 0.26,
+      "word_count": 4,
+      "start_word_idx": 47,
+      "end_word_idx": 50,
+      "words": [
+        {
+          "word": "about",
+          "start": 23.549,
+          "end": 23.889
+        },
+        {
+          "word": "whether",
+          "start": 24.089,
+          "end": 24.409
+        },
+        {
+          "word": "or",
+          "start": 24.569,
+          "end": 24.63
+        },
+        {
+          "word": "not",
+          "start": 24.71,
+          "end": 24.95
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Prepositional phrase with medium pause.",
+      "audio": {
+        "src": "segments/g14.wav",
+        "duration": 1.401
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.744,
+          "endY": 0.876
+        },
+        "acoustics": {
+          "f0Min": 183.913,
+          "f0Max": 352.099,
+          "f0Mean": 250.257,
+          "f0Start": 224.786,
+          "f0End": 204.014,
+          "voicedCount": 122
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.26
+      }
+    },
+    {
+      "group_id": "g15",
+      "index": 14,
+      "text": "you are an emotionally intelligent person?",
+      "start": 25.21,
+      "end": 27.812,
+      "pause_after": 4.262,
+      "word_count": 6,
+      "start_word_idx": 51,
+      "end_word_idx": 56,
+      "words": [
+        {
+          "word": "you",
+          "start": 25.21,
+          "end": 25.31
+        },
+        {
+          "word": "are",
+          "start": 25.35,
+          "end": 25.47
+        },
+        {
+          "word": "an",
+          "start": 25.51,
+          "end": 25.55
+        },
+        {
+          "word": "emotionally",
+          "start": 25.61,
+          "end": 26.331
+        },
+        {
+          "word": "intelligent",
+          "start": 26.411,
+          "end": 27.151
+        },
+        {
+          "word": "person?",
+          "start": 27.351,
+          "end": 27.812
+        }
+      ],
+      "llm_decision": "merge",
+      "llm_reason": "Split groups over-fragment the question; merge for full clause.",
+      "audio": {
+        "src": "segments/g15.wav",
+        "duration": 2.602
+      },
+      "pitchMovement": {
+        "label": "falling",
+        "line": {
+          "startY": 0.881,
+          "endY": 1.0
+        },
+        "acoustics": {
+          "f0Min": 96.314,
+          "f0Max": 377.655,
+          "f0Mean": 207.652,
+          "f0Start": 203.287,
+          "f0End": 184.097,
+          "voicedCount": 195
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 4.262
+      }
+    },
+    {
+      "group_id": "g16",
+      "index": 15,
+      "text": "Now that you think of it,",
+      "start": 32.074,
+      "end": 33.155,
+      "pause_after": 1.476,
+      "word_count": 6,
+      "start_word_idx": 57,
+      "end_word_idx": 62,
+      "words": [
+        {
+          "word": "Now",
+          "start": 32.074,
+          "end": 32.234
+        },
+        {
+          "word": "that",
+          "start": 32.294,
+          "end": 32.414
+        },
+        {
+          "word": "you",
+          "start": 32.454,
+          "end": 32.575
+        },
+        {
+          "word": "think",
+          "start": 32.615,
+          "end": 32.815
+        },
+        {
+          "word": "of",
+          "start": 32.875,
+          "end": 32.955
+        },
+        {
+          "word": "it,",
+          "start": 33.095,
+          "end": 33.155
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Introductory clause with strong pause.",
+      "audio": {
+        "src": "segments/g16.wav",
+        "duration": 1.081
+      },
+      "pitchMovement": {
+        "label": "falling",
+        "line": {
+          "startY": 0.413,
+          "endY": 0.904
+        },
+        "acoustics": {
+          "f0Min": 187.331,
+          "f0Max": 399.049,
+          "f0Mean": 299.774,
+          "f0Start": 276.619,
+          "f0End": 199.665,
+          "voicedCount": 92
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 1.476
+      }
+    },
+    {
+      "group_id": "g17",
+      "index": 16,
+      "text": "Would you consider yourself",
+      "start": 34.631,
+      "end": 35.892,
+      "pause_after": 0.3,
+      "word_count": 4,
+      "start_word_idx": 63,
+      "end_word_idx": 66,
+      "words": [
+        {
+          "word": "Would",
+          "start": 34.631,
+          "end": 34.771
+        },
+        {
+          "word": "you",
+          "start": 34.791,
+          "end": 34.911
+        },
+        {
+          "word": "consider",
+          "start": 34.951,
+          "end": 35.371
+        },
+        {
+          "word": "yourself",
+          "start": 35.431,
+          "end": 35.892
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Question start with medium pause.",
+      "audio": {
+        "src": "segments/g17.wav",
+        "duration": 1.261
+      },
+      "pitchMovement": {
+        "label": "rising",
+        "line": {
+          "startY": 0.728,
+          "endY": 0.335
+        },
+        "acoustics": {
+          "f0Min": 185.021,
+          "f0Max": 310.428,
+          "f0Mean": 251.519,
+          "f0Start": 227.3,
+          "f0End": 288.87,
+          "voicedCount": 103
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.3
+      }
+    },
+    {
+      "group_id": "g18",
+      "index": 17,
+      "text": "emotionally intelligent?",
+      "start": 36.192,
+      "end": 37.473,
+      "pause_after": 0.54,
+      "word_count": 2,
+      "start_word_idx": 67,
+      "end_word_idx": 68,
+      "words": [
+        {
+          "word": "emotionally",
+          "start": 36.192,
+          "end": 36.712
+        },
+        {
+          "word": "intelligent?",
+          "start": 36.752,
+          "end": 37.473
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Adjective phrase ending sentence.",
+      "audio": {
+        "src": "segments/g18.wav",
+        "duration": 1.281
+      },
+      "pitchMovement": {
+        "label": "rising",
+        "line": {
+          "startY": 0.432,
+          "endY": 0.287
+        },
+        "acoustics": {
+          "f0Min": 251.895,
+          "f0Max": 310.613,
+          "f0Mean": 279.252,
+          "f0Start": 273.661,
+          "f0End": 296.446,
+          "voicedCount": 109
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.54
+      }
+    },
+    {
+      "group_id": "g19",
+      "index": 18,
+      "text": "Please raise your hand if you do so.",
+      "start": 38.013,
+      "end": 43.816,
+      "pause_after": 0.02,
+      "word_count": 8,
+      "start_word_idx": 69,
+      "end_word_idx": 76,
+      "words": [
+        {
+          "word": "Please",
+          "start": 38.013,
+          "end": 38.293
+        },
+        {
+          "word": "raise",
+          "start": 38.353,
+          "end": 38.533
+        },
+        {
+          "word": "your",
+          "start": 38.553,
+          "end": 38.673
+        },
+        {
+          "word": "hand",
+          "start": 38.693,
+          "end": 38.853
+        },
+        {
+          "word": "if",
+          "start": 38.893,
+          "end": 38.953
+        },
+        {
+          "word": "you",
+          "start": 38.973,
+          "end": 39.094
+        },
+        {
+          "word": "do",
+          "start": 39.114,
+          "end": 39.234
+        },
+        {
+          "word": "so.",
+          "start": 39.294,
+          "end": 43.816
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Full imperative sentence suitable for pitch display.",
+      "audio": {
+        "src": "segments/g19.wav",
+        "duration": 5.803
+      },
+      "pitchMovement": {
+        "label": "rise-fall",
+        "line": {
+          "startY": 0.55,
+          "endY": 0.634
+        },
+        "acoustics": {
+          "f0Min": 90.558,
+          "f0Max": 361.227,
+          "f0Mean": 234.02,
+          "f0Start": 255.213,
+          "f0End": 242.024,
+          "voicedCount": 147
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.02
+      }
+    },
+    {
+      "group_id": "g20",
+      "index": 19,
+      "text": "And",
+      "start": 43.836,
+      "end": 43.896,
+      "pause_after": 0.621,
+      "word_count": 1,
+      "start_word_idx": 77,
+      "end_word_idx": 77,
+      "words": [
+        {
+          "word": "And",
+          "start": 43.836,
+          "end": 43.896
+        }
+      ],
+      "llm_decision": "merge",
+      "llm_reason": "Too short; merge with next group for conjunction flow.",
+      "audio": {
+        "src": "segments/g20.wav",
+        "duration": 0.06
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.645,
+          "endY": 0.653
+        },
+        "acoustics": {
+          "f0Min": 239.018,
+          "f0Max": 240.257,
+          "f0Mean": 239.449,
+          "f0Start": 240.257,
+          "f0End": 239.018,
+          "voicedCount": 6
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.621
+      }
+    },
+    {
+      "group_id": "g21",
+      "index": 20,
+      "text": "who of you",
+      "start": 44.517,
+      "end": 45.257,
+      "pause_after": 0.46,
+      "word_count": 3,
+      "start_word_idx": 78,
+      "end_word_idx": 80,
+      "words": [
+        {
+          "word": "who",
+          "start": 44.517,
+          "end": 44.677
+        },
+        {
+          "word": "of",
+          "start": 44.777,
+          "end": 44.857
+        },
+        {
+          "word": "you",
+          "start": 44.937,
+          "end": 45.257
+        }
+      ],
+      "llm_decision": "revise",
+      "llm_reason": "Combined 'And who of you' as question start.",
+      "audio": {
+        "src": "segments/g21.wav",
+        "duration": 0.74
+      },
+      "pitchMovement": {
+        "label": "falling",
+        "line": {
+          "startY": 0.0,
+          "endY": 0.84
+        },
+        "acoustics": {
+          "f0Min": 188.66,
+          "f0Max": 366.711,
+          "f0Mean": 258.491,
+          "f0Start": 357.191,
+          "f0End": 209.769,
+          "voicedCount": 71
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.46
+      }
+    },
+    {
+      "group_id": "g22",
+      "index": 21,
+      "text": "has ever",
+      "start": 45.717,
+      "end": 46.518,
+      "pause_after": 0.36,
+      "word_count": 2,
+      "start_word_idx": 81,
+      "end_word_idx": 82,
+      "words": [
+        {
+          "word": "has",
+          "start": 45.717,
+          "end": 45.917
+        },
+        {
+          "word": "ever",
+          "start": 46.198,
+          "end": 46.518
+        }
+      ],
+      "llm_decision": "merge",
+      "llm_reason": "Too fragmented; merge with next group for verb phrase.",
+      "audio": {
+        "src": "segments/g22.wav",
+        "duration": 0.801
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.773,
+          "endY": 0.86
+        },
+        "acoustics": {
+          "f0Min": 196.597,
+          "f0Max": 236.595,
+          "f0Mean": 216.799,
+          "f0Start": 220.173,
+          "f0End": 206.584,
+          "voicedCount": 53
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.36
+      }
+    },
+    {
+      "group_id": "g23",
+      "index": 22,
+      "text": "worked consciously",
+      "start": 46.878,
+      "end": 47.979,
+      "pause_after": 0.62,
+      "word_count": 2,
+      "start_word_idx": 83,
+      "end_word_idx": 84,
+      "words": [
+        {
+          "word": "worked",
+          "start": 46.878,
+          "end": 47.118
+        },
+        {
+          "word": "consciously",
+          "start": 47.258,
+          "end": 47.979
+        }
+      ],
+      "llm_decision": "revise",
+      "llm_reason": "Verb phrase 'has ever worked consciously' as single unit.",
+      "audio": {
+        "src": "segments/g23.wav",
+        "duration": 1.101
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.762,
+          "endY": 0.949
+        },
+        "acoustics": {
+          "f0Min": 183.465,
+          "f0Max": 251.461,
+          "f0Mean": 211.868,
+          "f0Start": 221.974,
+          "f0End": 192.579,
+          "voicedCount": 62
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.62
+      }
+    },
+    {
+      "group_id": "g24",
+      "index": 23,
+      "text": "on your emotional skill?",
+      "start": 48.599,
+      "end": 49.8,
+      "pause_after": 4.382,
+      "word_count": 4,
+      "start_word_idx": 85,
+      "end_word_idx": 88,
+      "words": [
+        {
+          "word": "on",
+          "start": 48.599,
+          "end": 48.679
+        },
+        {
+          "word": "your",
+          "start": 48.699,
+          "end": 48.859
+        },
+        {
+          "word": "emotional",
+          "start": 48.939,
+          "end": 49.439
+        },
+        {
+          "word": "skill?",
+          "start": 49.519,
+          "end": 49.8
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Prepositional phrase ending sentence.",
+      "audio": {
+        "src": "segments/g24.wav",
+        "duration": 1.201
+      },
+      "pitchMovement": {
+        "label": "rising",
+        "line": {
+          "startY": 0.869,
+          "endY": 0.19
+        },
+        "acoustics": {
+          "f0Min": 77.54,
+          "f0Max": 364.195,
+          "f0Mean": 206.499,
+          "f0Start": 205.155,
+          "f0End": 311.59,
+          "voicedCount": 87
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 4.382
+      }
+    },
+    {
+      "group_id": "g25",
+      "index": 24,
+      "text": "Thank you for sharing.",
+      "start": 54.182,
+      "end": 55.083,
+      "pause_after": 0.02,
+      "word_count": 4,
+      "start_word_idx": 89,
+      "end_word_idx": 92,
+      "words": [
+        {
+          "word": "Thank",
+          "start": 54.182,
+          "end": 54.402
+        },
+        {
+          "word": "you",
+          "start": 54.422,
+          "end": 54.542
+        },
+        {
+          "word": "for",
+          "start": 54.562,
+          "end": 54.682
+        },
+        {
+          "word": "sharing.",
+          "start": 54.702,
+          "end": 55.083
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Complete sentence with natural phrasing.",
+      "audio": {
+        "src": "segments/g25.wav",
+        "duration": 0.901
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.439,
+          "endY": 0.517
+        },
+        "acoustics": {
+          "f0Min": 199.509,
+          "f0Max": 296.248,
+          "f0Mean": 249.246,
+          "f0Start": 272.568,
+          "f0End": 260.44,
+          "voicedCount": 63
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.02
+      }
+    },
+    {
+      "group_id": "g26",
+      "index": 25,
+      "text": "You can now open your eyes again.",
+      "start": 55.103,
+      "end": 56.463,
+      "pause_after": 1.121,
+      "word_count": 7,
+      "start_word_idx": 93,
+      "end_word_idx": 99,
+      "words": [
+        {
+          "word": "You",
+          "start": 55.103,
+          "end": 55.203
+        },
+        {
+          "word": "can",
+          "start": 55.223,
+          "end": 55.343
+        },
+        {
+          "word": "now",
+          "start": 55.383,
+          "end": 55.523
+        },
+        {
+          "word": "open",
+          "start": 55.623,
+          "end": 55.823
+        },
+        {
+          "word": "your",
+          "start": 55.843,
+          "end": 55.963
+        },
+        {
+          "word": "eyes",
+          "start": 56.043,
+          "end": 56.163
+        },
+        {
+          "word": "again.",
+          "start": 56.223,
+          "end": 56.463
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Full sentence suitable for pitch movement.",
+      "audio": {
+        "src": "segments/g26.wav",
+        "duration": 1.36
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.791,
+          "endY": 0.923
+        },
+        "acoustics": {
+          "f0Min": 179.781,
+          "f0Max": 354.714,
+          "f0Mean": 214.481,
+          "f0Start": 217.33,
+          "f0End": 196.705,
+          "voicedCount": 122
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 1.121
+      }
+    },
+    {
+      "group_id": "g27",
+      "index": 26,
+      "text": "And thank you also",
+      "start": 57.584,
+      "end": 58.504,
+      "pause_after": 0.101,
+      "word_count": 4,
+      "start_word_idx": 100,
+      "end_word_idx": 103,
+      "words": [
+        {
+          "word": "And",
+          "start": 57.584,
+          "end": 57.724
+        },
+        {
+          "word": "thank",
+          "start": 57.864,
+          "end": 58.044
+        },
+        {
+          "word": "you",
+          "start": 58.064,
+          "end": 58.184
+        },
+        {
+          "word": "also",
+          "start": 58.244,
+          "end": 58.504
+        }
+      ],
+      "llm_decision": "revise",
+      "llm_reason": "Clause 'And thank you also' as introductory phrase.",
+      "audio": {
+        "src": "segments/g27.wav",
+        "duration": 0.92
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.55,
+          "endY": 0.325
+        },
+        "acoustics": {
+          "f0Min": 214.745,
+          "f0Max": 344.878,
+          "f0Mean": 266.325,
+          "f0Start": 255.227,
+          "f0End": 290.504,
+          "voicedCount": 73
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.101
+      }
+    },
+    {
+      "group_id": "g28",
+      "index": 27,
+      "text": "for being so very",
+      "start": 58.605,
+      "end": 59.725,
+      "pause_after": 0.44,
+      "word_count": 4,
+      "start_word_idx": 104,
+      "end_word_idx": 107,
+      "words": [
+        {
+          "word": "for",
+          "start": 58.605,
+          "end": 58.825
+        },
+        {
+          "word": "being",
+          "start": 58.945,
+          "end": 59.185
+        },
+        {
+          "word": "so",
+          "start": 59.245,
+          "end": 59.425
+        },
+        {
+          "word": "very",
+          "start": 59.465,
+          "end": 59.725
+        }
+      ],
+      "llm_decision": "split",
+      "llm_reason": "Overly long; split into two groups for better prosodic units.",
+      "audio": {
+        "src": "segments/g28.wav",
+        "duration": 1.12
+      },
+      "pitchMovement": {
+        "label": "rise-fall",
+        "line": {
+          "startY": 0.668,
+          "endY": 0.857
+        },
+        "acoustics": {
+          "f0Min": 177.817,
+          "f0Max": 279.5,
+          "f0Mean": 223.43,
+          "f0Start": 236.623,
+          "f0End": 207.109,
+          "voicedCount": 96
+        }
+      },
+      "boundaryToNext": {
+        "adjacentWordSpan": true,
+        "timeGapSec": 0.44
+      }
+    },
+    {
+      "group_id": "g29",
+      "index": 28,
+      "text": "honest with me",
+      "start": 60.165,
+      "end": 60.926,
+      "pause_after": 0.0,
+      "word_count": 3,
+      "start_word_idx": 108,
+      "end_word_idx": 110,
+      "words": [
+        {
+          "word": "honest",
+          "start": 60.165,
+          "end": 60.546
+        },
+        {
+          "word": "with",
+          "start": 60.626,
+          "end": 60.786
+        },
+        {
+          "word": "me",
+          "start": 60.846,
+          "end": 60.926
+        }
+      ],
+      "llm_decision": "keep",
+      "llm_reason": "Final adjective phrase ending audio.",
+      "audio": {
+        "src": "segments/g29.wav",
+        "duration": 0.761
+      },
+      "pitchMovement": {
+        "label": "level",
+        "line": {
+          "startY": 0.861,
+          "endY": 0.959
+        },
+        "acoustics": {
+          "f0Min": 171.371,
+          "f0Max": 217.005,
+          "f0Mean": 196.738,
+          "f0Start": 206.429,
+          "f0End": 190.993,
+          "voicedCount": 56
+        }
+      },
+      "boundaryToNext": null
+    }
+  ]
+}

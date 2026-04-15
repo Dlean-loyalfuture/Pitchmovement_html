@@ -1,0 +1,9 @@
+{
+  "lessons": [
+    {
+      "lessonId": "lesson-001",
+      "title": "Pitch movement in English",
+      "data": "data/lesson-001.json"
+    }
+  ]
+}
