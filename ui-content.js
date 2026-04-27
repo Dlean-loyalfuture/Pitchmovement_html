@@ -85,7 +85,7 @@ export const TASK_PROMPT = {
   heading: 'Your task',
   body:
     'Choose <strong>3–4 thought groups</strong> from the passage. ' +
-    'For each one, think about its the pitch movement and why the speaker made that choice. And then hover on each thought group and reply to test your idea.',
+    'For each one, think about its pitch movement and why the speaker made that choice. Then hover over each thought group and reply to validate your ideas.',
 };
 
 export const SOURCE_CONTEXT = {
