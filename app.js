@@ -5,9 +5,56 @@
 
 'use strict';
 
-import { renderLesson } from './renderers.js';
-import { chipId, clamp, SVG_LAYOUT } from './utils.js';
-import { INSTRUCTIONS } from './ui-content.js';
+import { renderLesson } from './renderers.js?v=422';
+import { chipId, clamp, SVG_LAYOUT } from './utils.js?v=422';
+import { INSTRUCTIONS } from './ui-content.js?v=422';
+
+/* ── Sidebar: step progress tracking ───────────────────────── */
+// stepsDone tracks which steps are complete: { 1: bool, 2: bool, 3: bool }
+const stepsDone = { 1: false, 2: false, 3: false };
+// currentStep: which step is currently active (1-3)
+let currentStep = 1;
+
+function markStepDone(n) {
+  if (stepsDone[n]) return; // already done, no re-render
+  stepsDone[n] = true;
+  // Advance currentStep to next incomplete step
+  if (n >= currentStep) {
+    for (let i = n + 1; i <= 3; i++) {
+      if (!stepsDone[i]) { currentStep = i; break; }
+      if (i === 3) currentStep = 3; // all done, stay on 3
+    }
+  }
+  updateSidebarSteps();
+}
+
+function updateSidebarSteps() {
+  for (let n = 1; n <= 3; n++) {
+    const el = document.querySelector(`.sidebar-step[data-step="${n}"]`);
+    if (!el) continue;
+    el.classList.toggle('is-done',    stepsDone[n]);
+    el.classList.toggle('is-current', !stepsDone[n] && n === currentStep);
+  }
+}
+
+function wireSidebar() {
+  const sidebar = document.getElementById('steps-sidebar');
+  const stepsEl = document.getElementById('learning-steps');
+  if (!sidebar || !stepsEl) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => sidebar.classList.toggle('is-visible', !entry.isIntersecting),
+    { threshold: 0 }
+  );
+  observer.observe(stepsEl);
+
+  // Step 1 marked done by accordion (all 3 concept items expanded)
+
+  sidebar.addEventListener('mouseenter', () => sidebar.classList.add('is-expanded'));
+  sidebar.addEventListener('mouseleave', () => sidebar.classList.remove('is-expanded'));
+
+  updateSidebarSteps();
+}
 
 /* ── JSON adapter ─────────────────────────────────────────────── */
 function adaptLesson(raw) {
@@ -16,13 +63,18 @@ function adaptLesson(raw) {
     const thoughtGroups = (sent.groups ?? []).map((g, gIdx) => {
       const pm = g.pitchMovement ?? {};
       return {
-        groupId:  g.groupId ?? `${sentenceId}-g${gIdx + 1}`,
+        groupId:    g.groupId  ?? `${sentenceId}-g${gIdx + 1}`,
+        // focus: check top-level first, then inside pitchMovement
+        focusWord:  g.focusWord ?? g.focus_word ?? g.focus ?? pm.focusWord ?? pm.focus_word ?? pm.focus ?? null,
+        // start/end labels: explicit fields take priority, else parse from single label
+        startLabel: g.startLabel ?? g.start_label ?? pm.startLabel ?? pm.start_label ?? null,
+        endLabel:   g.endLabel   ?? g.end_label   ?? pm.endLabel   ?? pm.end_label   ?? null,
+        reason:     g.reason     ?? pm.reason      ?? null,
         index:    g.index   ?? gIdx,
         text:     g.text    ?? '',
         audio:    g.audio   ?? null,
         pitchMovement: {
           label:  pm.label  ?? 'level',
-          reason: pm.reason ?? null,
           points: pm.points ?? null,
         },
       };
@@ -30,7 +82,8 @@ function adaptLesson(raw) {
     return {
       sentenceId,
       order: sIdx + 1,
-      badge: sent.badge ?? `S${sIdx + 1}`,
+      badge:   sent.badge   ?? `S${sIdx + 1}`,
+      purpose: sent.purpose ?? null,
       thoughtGroups,
     };
   });
@@ -71,9 +124,10 @@ async function init() {
     if (!firstLesson?.data) throw new Error('Manifest missing lesson data path.');
     const lesson = adaptLesson(await loadJSON(firstLesson.data));
     state.lesson = lesson;
-    renderLesson(lesson, { onChipClick }, root);
+    renderLesson(lesson, { onChipClick, onStep1Done: () => markStepDone(1) }, root);
     wireControls();
     wireAudio();
+    wireSidebar();
     syncUI();
     showLoading(root, false);
   } catch (err) {
@@ -89,9 +143,14 @@ async function loadJSON(path) {
 
 /* ── Controls ─────────────────────────────────────────────────── */
 function wireControls() {
-  document.getElementById('btn-play').addEventListener('click',   playAll);
-  document.getElementById('btn-pause').addEventListener('click',  pausePlayback);
-  document.getElementById('btn-replay').addEventListener('click', replayAll);
+  document.getElementById('btn-play').addEventListener('click',     playAll);
+  document.getElementById('btn-pause').addEventListener('click',    pausePlayback);
+  document.getElementById('btn-continue').addEventListener('click', continuePlayback);
+
+  // Sidebar mirror buttons
+  document.getElementById('sb-play')?.addEventListener('click',     playAll);
+  document.getElementById('sb-pause')?.addEventListener('click',    pausePlayback);
+  document.getElementById('sb-continue')?.addEventListener('click', continuePlayback);
 }
 
 function wireAudio() {
@@ -120,12 +179,14 @@ function clockReset() {
   state.clockOffset = 0; state.clockStart = null;
   state.clockDuration = 0; state.clockStopAt = null;
   state.isPlaying = false;
+  _lastScrolledSid = null;
 }
 
 /* ── Play all ─────────────────────────────────────────────────── */
 function playAll() {
   if (!state.lesson) return;
   state.mode = 'all'; state.playScope = 'all';
+  markStepDone(2);
   startGroup(0, 0);
 }
 
@@ -159,17 +220,26 @@ function advanceGroup() {
   }
 }
 
-/* ── Pause / Replay ───────────────────────────────────────────── */
+/* ── Pause / Continue ─────────────────────────────────────────── */
 function pausePlayback() {
   if (!state.isPlaying) return;
   clockPause(); state.audio.pause(); stopRaf(); draw(); syncUI();
 }
 
-function replayAll() {
-  clockReset(); state.audio.pause(); state.audioAvailable = false;
-  state.mode = 'all'; state.playScope = 'all';
-  stopRaf(); resetAllVisuals(); syncUI();
-  setTimeout(() => startGroup(0, 0), 30);
+function continuePlayback() {
+  if (state.isPlaying) return;
+  if (state.clockOffset <= 0) { playAll(); return; }
+  const sentence = state.lesson?.sentences[state.currentSentenceIndex];
+  const group    = sentence?.thoughtGroups[state.currentGroupIndex];
+  if (!group) return;
+  const duration = group.audio?.duration ?? 1;
+  clockResume(state.clockOffset, duration, state.clockStopAt ?? duration);
+  if (state.audio.src) {
+    state.audio.currentTime = state.clockOffset;
+    state.audio.play().catch(() => {});
+  }
+  syncUI();
+  startRaf();
 }
 
 /* ── Click chip ───────────────────────────────────────────────── */
@@ -189,6 +259,7 @@ function onChipClick(sentenceId, groupId) {
   if (chipEl) { chipEl.classList.remove('is-pulsing'); void chipEl.offsetWidth; chipEl.classList.add('is-pulsing'); }
 
   state.mode = 'tg'; state.playScope = 'tg';
+  markStepDone(3);
   state.currentSentenceIndex = sentIdx;
   state.currentGroupIndex    = grpIdx;
 
@@ -268,6 +339,8 @@ function drawGroupAt(sentence, group, t, duration) {
                 + (state.currentGroupIndex + clamp(t / duration, 0, 1)) / nGrps / total;
   const progEl = document.getElementById('progress-fill');
   if (progEl) progEl.style.width = (globalP * 100) + '%';
+  const sbProg = document.getElementById('sb-progress-fill');
+  if (sbProg) sbProg.style.width = (globalP * 100) + '%';
 
   updateGroupVisualState(sentence, t, duration);
 }
@@ -331,11 +404,25 @@ function resetGroupReveals(sentence, activeGrpIdx) {
 }
 
 /* ── Visual helpers ───────────────────────────────────────────── */
+/* ── Scroll active card into center of viewport ──────────────── */
+let _lastScrolledSid = null;
+function scrollToActiveCard(sid) {
+  // Only scroll when the active sentence changes (not every RAF tick)
+  if (sid === _lastScrolledSid) return;
+  _lastScrolledSid = sid;
+  const card = document.getElementById(`card-${sid}`);
+  if (!card) return;
+  // Use smooth scrollIntoView with block:'center' so the card stays mid-screen
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 function activateCard(activeSid) {
   state.lesson?.sentences.forEach(s => {
     const card = document.getElementById(`card-${s.sentenceId}`);
     if (card) card.classList.toggle('is-active', s.sentenceId === activeSid);
   });
+  // Scroll only during active playback (not on endPlayback / reset)
+  if (state.isPlaying) scrollToActiveCard(activeSid);
 }
 
 function resetAllVisuals() {
@@ -407,10 +494,20 @@ function endPlayback() {
 
 function syncUI() {
   const p = state.isPlaying;
-  const btnPlay  = document.getElementById('btn-play');
-  const btnPause = document.getElementById('btn-pause');
-  if (btnPlay)  btnPlay.disabled  = p;
-  if (btnPause) btnPause.disabled = !p;
+  const btnPlay     = document.getElementById('btn-play');
+  const btnPause    = document.getElementById('btn-pause');
+  const btnContinue = document.getElementById('btn-continue');
+  if (btnPlay)     btnPlay.disabled     = p;
+  if (btnPause)    btnPause.disabled    = !p;
+  if (btnContinue) btnContinue.disabled = p;
+
+  // Sidebar mirrors
+  const sbPlay     = document.getElementById('sb-play');
+  const sbPause    = document.getElementById('sb-pause');
+  const sbContinue = document.getElementById('sb-continue');
+  if (sbPlay)     sbPlay.disabled     = p;
+  if (sbPause)    sbPause.disabled    = !p;
+  if (sbContinue) sbContinue.disabled = p;
 }
 
 function showLoading(root, show) {

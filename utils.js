@@ -30,12 +30,10 @@ export function normalizeYToPixel(normalizedY, layout = SVG_LAYOUT) {
 }
 
 export function getColorForMovement(label) {
-  switch ((label || '').toLowerCase()) {
-    case 'rising':  return { stroke: '#e07b00', text: '#b85c00', arrowDir: 'up'   };
-    case 'falling': return { stroke: '#1a6b36', text: '#1a6b36', arrowDir: 'down' };
-    case 'level':
-    default:        return { stroke: '#888780', text: '#6b6966', arrowDir: null   };
-  }
+  const s = (label || '').toLowerCase();
+  if (s.includes('rising'))  return { stroke: '#e07b00', text: '#b85c00', arrowDir: 'up'   };
+  if (s.includes('falling')) return { stroke: '#1a6b36', text: '#1a6b36', arrowDir: 'down' };
+  return { stroke: '#888780', text: '#6b6966', arrowDir: null };
 }
 
 /**

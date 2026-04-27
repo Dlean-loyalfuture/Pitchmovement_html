@@ -1,106 +1,101 @@
 /**
  * ui-content.js — 静态 UI 文本配置
- *
- * 所有面向用户的文字、描述、图例标签都集中在这里。
- * 修改界面文字时只需编辑此文件，不需要动 renderers.js 或 app.js。
- *
- * 结构说明：
- *   INSTRUCTIONS      — 页面顶部操作提示
- *   CONTROLS          — 播放控制区按钮文字
- *   CONCEPT_PANEL     — 概念面板（thought group 说明 + pitch movement 类型）
- *   PITCH_TOOLTIPS    — 每种 pitch 类型的通用 hover 描述
- *   LEGEND            — 图例文字
+ * 4.21 更新：精简概念区、新增 LEARNING_STEPS、TASK_PROMPT
  */
 
 'use strict';
 
-/* ─── 页面顶部操作提示 ──────────────────────────────────────────── */
 export const INSTRUCTIONS =
-  'Press <strong>Play all</strong> to hear the full passage, ' +
-  'or <strong>click any thought group</strong> to hear just that part.';
+  'Listen to each thought group. Notice where the pitch moves — and why.';
 
-/* ─── 播放控制区 ────────────────────────────────────────────────── */
 export const CONTROLS = {
   playAll:  'Play all',
   pause:    'Pause',
-  replay:   'Replay',
+  continue: 'Continue',
 };
 
-/* ─── 概念面板 ──────────────────────────────────────────────────── */
+export const LEARNING_STEPS = {
+  heading: 'How to use this page',
+  steps: [
+    {
+      number: '1',
+      label: 'Review key ideas',
+      detail: 'Skim the quick reference below — thought groups, pitch movement, focus words.',
+    },
+    {
+      number: '2',
+      label: 'Listen to the passage',
+      detail: 'Press <strong>Play all</strong> and follow the pitch contours as they animate.',
+    },
+    {
+      number: '3',
+      label: 'Analyse 3–4 thought groups',
+      detail: 'Click any group to replay it. Hover to see start / focus / end breakdown.',
+    },
+  ],
+};
+
+export const LEARNING_STEPS_SIDEBAR = [
+  { number: '1', label: 'Review' },
+  { number: '2', label: 'Listen' },
+  { number: '3', label: 'Analyse' },
+];
+
 export const CONCEPT_PANEL = {
-
-  // Section 1 — What is a thought group
   thoughtGroup: {
-    title: 'What is a thought group?',
-    description:
-      'A <strong>thought group</strong> is a meaningful chunk of speech — words that belong ' +
-      'together and are processed as one unit. Each thought group is spoken in a continuous ' +
-      'line of melody and ends with a <strong>pitch movement</strong>. ' +
-      'Pauses between thought groups signal boundaries between ideas.',
-    facts: [
+    title: 'Quick reference',
+    items: [
       {
-        icon: '⏸',
-        text: 'Pauses of ½–2 seconds between groups — longer pauses draw more attention to content.',
+        term: 'Thought group',
+        def: 'A chunk of words spoken as one unit of meaning, separated by a brief pause.',
       },
       {
-        icon: '📏',
-        text: 'Usually 1–15 words. Shorter groups = more important or unfamiliar content.',
+        term: 'Focus word',
+        def: 'The most prominent word in a thought group — where emphasis lands.',
       },
       {
-        icon: '🎵',
-        text: 'No break in melody within a group; the pitch movement comes at the end.',
+        term: 'Pitch movement',
+        def: 'How pitch changes at the end of a thought group: falling signals completion; rising signals continuation or a question.',
       },
     ],
   },
-
-  // Section 2 — Pitch movement types
   pitchMovement: {
-    title: 'Pitch movement at the end of thought groups',
+    title: '',
     types: [
-      {
-        key:   'falling',
-        badge: '↓ falling',
-        desc:  'Signals conclusion or certainty. Used at the end of statements, ' +
-               'completed ideas, and answers that are definitive.',
-      },
-      {
-        key:   'rising',
-        badge: '↑ rising  (low)',
-        desc:  'Signals continuation or uncertainty — the thought is not yet complete. ' +
-               'Common before a pause mid-sentence or in lists.',
-      },
-      {
-        key:   'rising',
-        badge: '↑ rising  (high)',
-        desc:  "Signals a question, strong emotion, or an appeal for the listener's response. " +
-               'Typical in yes/no questions.',
-      },
-      {
-        key:   'level',
-        badge: '— level',
-        desc:  'Pitch stays relatively flat. Often heard mid-thought, in hesitations, ' +
-               'or when reading lists without strong emphasis.',
-      },
+      { key: 'falling', badge: '↓ falling', desc: '' },
+      { key: 'rising',  badge: '↑ rising',  desc: '' },
+      { key: 'level',   badge: '— level',   desc: '' },
     ],
   },
 };
 
-/* ─── Hover Tooltip 描述（按 pitch 类型） ───────────────────────── */
 export const PITCH_TOOLTIPS = {
-  rising:
-    'Pitch moves upward — common in yes/no questions, list continuations, and non-final clauses.',
-  falling:
-    'Pitch moves downward — signals completion or certainty. ' +
-    'Typical at the end of declarative sentences.',
-  level:
-    'Pitch stays relatively flat — often signals continuation or a list.',
+  rising:  'Pitch moves upward — yes/no questions, list continuations, non-final clauses.',
+  falling: 'Pitch moves downward — signals completion or certainty.',
+  level:   'Pitch stays relatively flat — often signals continuation.',
 };
 
-/* ─── 图例 ──────────────────────────────────────────────────────── */
+export const ANALYSIS_LABELS = {
+  start: 'Start',
+  focus: 'Focus',
+  end:   'End',
+};
+
+export const TASK_PROMPT = {
+  heading: 'Your task',
+  body:
+    'Choose <strong>3–4 thought groups</strong> from the passage. ' +
+    'For each one, think about its the pitch movement and why the speaker made that choice. And then hover on each thought group and reply to test your idea.',
+};
+
+export const SOURCE_CONTEXT = {
+  heading: 'About this passage',
+  body:
+    '<strong>Emotional intelligence</strong> (EQ) is the ability to recognise, understand, and manage your own emotions — and to read and influence the emotions of others. ' +
+    'This excerpt is from a TEDx talk by Ramona Hacker: ' +
+    '<a href="https://youtu.be/D6_J7FfgWVc?si=EBaVGK5bH85_sX58" target="_blank" rel="noopener"><em>6 Steps to Improve Your Emotional Intelligence</em> · TEDxTUM</a>.',
+};
+
 export const LEGEND = [
-  { type: 'swatch', color: '#e07b00', label: 'Rising'      },
-  { type: 'swatch', color: '#1a6b36', label: 'Falling'     },
-  { type: 'swatch', color: '#888780', label: 'Level'       },
-  { type: 'box',                      label: 'Active group' },
-  { type: 'click',                    label: 'Click to replay' },
+ 
 ];

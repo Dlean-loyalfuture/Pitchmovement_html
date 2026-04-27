@@ -1,9 +1,13 @@
 /**
  * renderers.js — DOM and SVG rendering from lesson JSON.
- * Stateless: every function takes data and returns DOM nodes or mutates SVG.
- * Does not import playback logic; receives callbacks instead.
- *
- * 静态文字全部来自 ui-content.js，此文件不再包含任何面向用户的硬编码字符串。
+ * 4.21 更新：
+ *  - Learning Steps 模块（页面顶部完整版）
+ *  - Sticky sidebar（精简步骤）
+ *  - 最小化概念区
+ *  - Sentence card 新增 sentence purpose
+ *  - Focus word 加粗
+ *  - Hover 分析框显示 Start / Focus / End（替代大 tooltip）
+ *  - Task prompt 区块
  */
 
 'use strict';
@@ -16,54 +20,99 @@ import {
   resolveContourStrategy,
   svgEl,
   chipId,
-  clipId,
-  clipRectId,
-} from './utils.js';
+} from './utils.js?v=422';
 
 import {
   CONTROLS,
   CONCEPT_PANEL,
   PITCH_TOOLTIPS,
   LEGEND,
-} from './ui-content.js';
+  LEARNING_STEPS,
+  LEARNING_STEPS_SIDEBAR,
+  ANALYSIS_LABELS,
+  TASK_PROMPT,
+  SOURCE_CONTEXT,
+} from './ui-content.js?v=422';
 
 /* ── Public API ───────────────────────────────────────────────── */
-
-/**
- * Render the full lesson into #app.
- * @param {object} lesson     — parsed lesson JSON
- * @param {object} callbacks  — { onChipClick(sentenceId, groupId) }
- * @param {HTMLElement} root  — container element
- */
 export function renderLesson(lesson, callbacks, root) {
   root.innerHTML = '';
 
-  // Header
-  const header = renderHeader(lesson);
-  root.appendChild(header);
-
-  // Concept panel (pitch movement types overview)
-  root.appendChild(renderConceptPanel());
+  root.appendChild(renderSidebar());
+  root.appendChild(renderHeader(lesson));
+  root.appendChild(renderLearningSteps());
+  root.appendChild(renderConceptPanel(callbacks.onStep1Done));
+  root.appendChild(renderControls());
+  root.appendChild(renderSourceContext());
   
-  // Controls
-  const controls = renderControls();
-  root.appendChild(controls);
 
-  // Sentence cards
   const sentencesEl = document.createElement('div');
   sentencesEl.className = 'lesson-sentences';
   sentencesEl.id = 'lesson-sentences';
-
   for (const sentence of lesson.sentences) {
-    const card = renderSentenceCard(sentence, lesson.ui, callbacks);
-    sentencesEl.appendChild(card);
+    sentencesEl.appendChild(renderSentenceCard(sentence, lesson.ui, callbacks));
   }
   root.appendChild(sentencesEl);
+  root.appendChild(renderTaskPrompt());
 
-  // Legend
-  if (lesson.ui?.showLegend) {
-    root.appendChild(renderLegend());
-  }
+  if (lesson.ui?.showLegend) root.appendChild(renderLegend());
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────── */
+function renderSidebar() {
+  const sidebar = document.createElement('div');
+  sidebar.className = 'steps-sidebar';
+  sidebar.id = 'steps-sidebar';
+
+  LEARNING_STEPS_SIDEBAR.forEach((step, idx) => {
+    const fullStep = LEARNING_STEPS.steps[idx] ?? step;
+    const item = document.createElement('div');
+    item.className = 'sidebar-step';
+    item.dataset.step = String(idx + 1);
+
+    const num = document.createElement('div');
+    num.className = 'sidebar-num';
+    num.innerHTML = `<span class="sidebar-num-text">${step.number}</span><span class="sidebar-check" aria-hidden="true">✓</span>`;
+
+    const labelEl = document.createElement('div');
+    labelEl.className = 'sidebar-step-label';
+    labelEl.textContent = step.label;
+
+    const detailEl = document.createElement('div');
+    detailEl.className = 'sidebar-step-detail';
+    detailEl.innerHTML = fullStep.detail ?? '';
+
+    item.appendChild(num);
+    item.appendChild(labelEl);
+    item.appendChild(detailEl);
+    sidebar.appendChild(item);
+  });
+
+  // Playback controls divider + buttons
+  const divider = document.createElement('div');
+  divider.className = 'sidebar-divider';
+  sidebar.appendChild(divider);
+
+  const controls = document.createElement('div');
+  controls.className = 'sidebar-playback';
+  controls.innerHTML = `
+    <button class="sb-btn" id="sb-play" title="${CONTROLS.playAll}">
+      <span class="icon-play" aria-hidden="true"></span>
+      <span class="sb-btn-label">${CONTROLS.playAll}</span>
+    </button>
+    <button class="sb-btn" id="sb-pause" disabled title="${CONTROLS.pause}">
+      <span class="icon-pause" aria-hidden="true"><span></span><span></span></span>
+      <span class="sb-btn-label">${CONTROLS.pause}</span>
+    </button>
+    <button class="sb-btn" id="sb-continue" title="${CONTROLS.continue}">
+      <span class="icon-play" aria-hidden="true"></span>
+      <span class="sb-btn-label">${CONTROLS.continue}</span>
+    </button>
+    <div class="sb-progress"><div class="sb-progress-fill" id="sb-progress-fill"></div></div>
+  `;
+  sidebar.appendChild(controls);
+
+  return sidebar;
 }
 
 /* ── Header ───────────────────────────────────────────────────── */
@@ -86,109 +135,129 @@ function renderHeader(lesson) {
   return header;
 }
 
-/* ── Tooltip builder ──────────────────────────────────────────── */
-function buildTooltip(group) {
-  const tooltip = document.createElement('div');
-  tooltip.className = 'tg-tooltip';
-  tooltip.setAttribute('role', 'tooltip');
+/* ── Learning Steps (full) ────────────────────────────────────── */
+function renderLearningSteps() {
+  const wrap = document.createElement('div');
+  wrap.className = 'learning-steps';
+  wrap.id = 'learning-steps';
 
-  const pm       = group.pitchMovement;
-  const rawLabel = (pm?.label ?? 'level').toLowerCase();
-  const baseKey  = rawLabel.includes('rising')  ? 'rising'
-                 : rawLabel.includes('falling') ? 'falling'
-                 : 'level';
+  const heading = document.createElement('div');
+  heading.className = 'learning-steps-heading';
+  heading.textContent = LEARNING_STEPS.heading;
+  wrap.appendChild(heading);
 
-  // Label line
-  const labelEl = document.createElement('div');
-  labelEl.className = 'tg-tooltip-label';
-  const icon = baseKey === 'rising' ? '↑' : baseKey === 'falling' ? '↓' : '—';
-  labelEl.textContent = `${icon} ${pm?.label ?? 'level'}`;
-  tooltip.appendChild(labelEl);
+  const list = document.createElement('div');
+  list.className = 'steps-list';
 
-  // General description — from ui-content.js
-  const descEl = document.createElement('div');
-  descEl.className = 'tg-tooltip-desc';
-  descEl.textContent = PITCH_TOOLTIPS[baseKey] ?? '';
-  tooltip.appendChild(descEl);
+  LEARNING_STEPS.steps.forEach(step => {
+    const item = document.createElement('div');
+    item.className = 'step-item';
 
-  // Per-group reason from JSON
-  const reason = group.llm_reason ?? group.reason ?? pm?.reason ?? null;
-  if (reason) {
-    const reasonEl = document.createElement('div');
-    reasonEl.className = 'tg-tooltip-reason';
-    reasonEl.textContent = reason;
-    tooltip.appendChild(reasonEl);
-  }
+    const num = document.createElement('div');
+    num.className = 'step-num';
+    num.textContent = step.number;
 
-  return tooltip;
+    const body = document.createElement('div');
+    body.className = 'step-body';
+
+    const lbl = document.createElement('div');
+    lbl.className = 'step-label';
+    lbl.textContent = step.label;
+
+    const det = document.createElement('div');
+    det.className = 'step-detail';
+    det.innerHTML = step.detail;
+
+    body.appendChild(lbl);
+    body.appendChild(det);
+    item.appendChild(num);
+    item.appendChild(body);
+    list.appendChild(item);
+  });
+
+  wrap.appendChild(list);
+  return wrap;
 }
 
-/* ── Concept panel ────────────────────────────────────────────── */
-function renderConceptPanel() {
+/* ── Concept panel — accordion ────────────────────────────────── */
+function renderConceptPanel(onAllExpanded) {
   const panel = document.createElement('div');
   panel.className = 'concept-panel';
 
-  const { thoughtGroup, pitchMovement } = CONCEPT_PANEL;
+  const titleRow = document.createElement('div');
+  titleRow.className = 'concept-panel-title-row';
 
-  // ── Section 1: What is a thought group ──
-  const sec1Title = document.createElement('div');
-  sec1Title.className = 'concept-panel-title';
-  sec1Title.textContent = thoughtGroup.title;
-  panel.appendChild(sec1Title);
+  const title = document.createElement('div');
+  title.className = 'concept-panel-title';
+  title.textContent = CONCEPT_PANEL.thoughtGroup.title;
+  titleRow.appendChild(title);
 
-  const tgDesc = document.createElement('p');
-  tgDesc.className = 'concept-tg-desc';
-  tgDesc.innerHTML = thoughtGroup.description;
-  panel.appendChild(tgDesc);
+  const doneBadge = document.createElement('div');
+  doneBadge.className = 'concept-done-badge';
+  doneBadge.textContent = '✓ Done';
+  doneBadge.setAttribute('aria-hidden', 'true');
+  titleRow.appendChild(doneBadge);
+  panel.appendChild(titleRow);
 
-  const tgFacts = document.createElement('div');
-  tgFacts.className = 'concept-facts';
-  thoughtGroup.facts.forEach(f => {
-    const row = document.createElement('div');
-    row.className = 'concept-fact-row';
-    row.innerHTML =
-      `<span class="concept-fact-icon">${f.icon}</span>` +
-      `<span class="concept-fact-text">${f.text}</span>`;
-    tgFacts.appendChild(row);
+  const expandedSet = new Set();
+  const total = CONCEPT_PANEL.thoughtGroup.items.length;
+
+  CONCEPT_PANEL.thoughtGroup.items.forEach((item, idx) => {
+    const cell = document.createElement('div');
+    cell.className = 'concept-accordion';
+    cell.setAttribute('role', 'button');
+    cell.tabIndex = 0;
+    cell.setAttribute('aria-expanded', 'false');
+
+    const header = document.createElement('div');
+    header.className = 'concept-accordion-header';
+
+    const term = document.createElement('div');
+    term.className = 'concept-term';
+    term.textContent = item.term;
+
+    const chevron = document.createElement('span');
+    chevron.className = 'concept-chevron';
+    chevron.setAttribute('aria-hidden', 'true');
+    chevron.textContent = '▸';
+
+    header.appendChild(term);
+    header.appendChild(chevron);
+
+    const body = document.createElement('div');
+    body.className = 'concept-accordion-body';
+
+    const def = document.createElement('div');
+    def.className = 'concept-def';
+    def.textContent = item.def;
+    body.appendChild(def);
+
+    cell.appendChild(header);
+    cell.appendChild(body);
+
+    const toggle = () => {
+      if (cell.classList.contains('is-open')) return;
+      cell.classList.add('is-open');
+      cell.setAttribute('aria-expanded', 'true');
+      expandedSet.add(idx);
+      if (expandedSet.size === total) {
+        doneBadge.classList.add('is-visible');
+        onAllExpanded?.();
+      }
+    };
+
+    cell.addEventListener('click', toggle);
+    cell.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+
+    panel.appendChild(cell);
   });
-  panel.appendChild(tgFacts);
 
-  // ── Divider ──
-  const divider = document.createElement('div');
-  divider.className = 'concept-divider';
-  panel.appendChild(divider);
-
-  // ── Section 2: Pitch movement types ──
-  const sec2Title = document.createElement('div');
-  sec2Title.className = 'concept-panel-title';
-  sec2Title.textContent = pitchMovement.title;
-  panel.appendChild(sec2Title);
-
-  const items = document.createElement('div');
-  items.className = 'concept-items';
-
-  pitchMovement.types.forEach(c => {
-    const item = document.createElement('div');
-    item.className = 'concept-item';
-
-    const badge = document.createElement('span');
-    badge.className = `concept-badge pm-${c.key}`;
-    badge.textContent = c.badge;
-
-    const desc = document.createElement('span');
-    desc.style.color = 'var(--text-secondary)';
-    desc.textContent = c.desc;
-
-    item.appendChild(badge);
-    item.appendChild(desc);
-    items.appendChild(item);
-  });
-
-  panel.appendChild(items);
   return panel;
 }
 
-/* ── Global controls ──────────────────────────────────────────── */
+/* ── Controls ─────────────────────────────────────────────────── */
 function renderControls() {
   const bar = document.createElement('div');
   bar.className = 'controls';
@@ -200,8 +269,8 @@ function renderControls() {
     <button class="btn" id="btn-pause" disabled aria-label="${CONTROLS.pause}">
       <span class="icon-pause" aria-hidden="true"><span></span><span></span></span> ${CONTROLS.pause}
     </button>
-    <button class="btn" id="btn-replay" aria-label="${CONTROLS.replay}">
-      <span class="icon-replay" aria-hidden="true">↺</span> ${CONTROLS.replay}
+    <button class="btn" id="btn-continue" aria-label="${CONTROLS.continue}">
+      <span class="icon-play" aria-hidden="true"></span> ${CONTROLS.continue}
     </button>
     <div class="progress-bar" role="progressbar" aria-label="Playback progress">
       <div class="progress-fill" id="progress-fill"></div>
@@ -211,6 +280,42 @@ function renderControls() {
   return bar;
 }
 
+/* ── Task prompt ──────────────────────────────────────────────── */
+function renderTaskPrompt() {
+  const wrap = document.createElement('div');
+  wrap.className = 'task-prompt';
+
+  const heading = document.createElement('div');
+  heading.className = 'task-prompt-heading';
+  heading.textContent = TASK_PROMPT.heading;
+  wrap.appendChild(heading);
+
+  const body = document.createElement('p');
+  body.className = 'task-prompt-body';
+  body.innerHTML = TASK_PROMPT.body;
+  wrap.appendChild(body);
+
+  return wrap;
+}
+
+/* ── Source context ───────────────────────────────────────────── */
+function renderSourceContext() {
+  const wrap = document.createElement('div');
+  wrap.className = 'source-context';
+
+  const heading = document.createElement('div');
+  heading.className = 'source-context-heading';
+  heading.textContent = SOURCE_CONTEXT.heading;
+  wrap.appendChild(heading);
+
+  const body = document.createElement('p');
+  body.className = 'source-context-body';
+  body.innerHTML = SOURCE_CONTEXT.body;
+  wrap.appendChild(body);
+
+  return wrap;
+}
+
 /* ── Sentence card ────────────────────────────────────────────── */
 export function renderSentenceCard(sentence, uiOptions, callbacks) {
   const card = document.createElement('div');
@@ -218,10 +323,15 @@ export function renderSentenceCard(sentence, uiOptions, callbacks) {
   card.id = `card-${sentence.sentenceId}`;
   card.setAttribute('data-sentence-id', sentence.sentenceId);
 
-  // Text row
-  card.appendChild(renderThoughtGroups(sentence, callbacks));
+  // Sentence purpose row (if present)
+  if (sentence.purpose) {
+    const purpose = document.createElement('div');
+    purpose.className = 'sentence-purpose';
+    purpose.textContent = sentence.purpose;
+    card.appendChild(purpose);
+  }
 
-  // Contour row
+  card.appendChild(renderThoughtGroups(sentence, callbacks));
   card.appendChild(renderContour(sentence, uiOptions));
 
   return card;
@@ -232,19 +342,16 @@ export function renderThoughtGroups(sentence, callbacks) {
   const top = document.createElement('div');
   top.className = 'sentence-top';
 
-  // Badge
   const badge = document.createElement('span');
   badge.className = 'sentence-badge';
   badge.textContent = sentence.badge || `S${sentence.order}`;
   badge.setAttribute('aria-hidden', 'true');
   top.appendChild(badge);
 
-  // Chips row
   const row = document.createElement('div');
   row.className = 'tg-row';
 
   sentence.thoughtGroups.forEach((group, idx) => {
-    // Separator before groups after the first
     if (idx > 0) {
       const sep = document.createElement('span');
       sep.className = 'tg-sep';
@@ -253,11 +360,9 @@ export function renderThoughtGroups(sentence, callbacks) {
       row.appendChild(sep);
     }
 
-    // Tooltip wrapper (handles hover show/hide via CSS)
     const wrap = document.createElement('div');
     wrap.className = 'tg-tooltip-wrap';
 
-    // Chip
     const chip = document.createElement('div');
     chip.className = 'tg-chip';
     chip.id = chipId(sentence.sentenceId, group.groupId);
@@ -267,44 +372,21 @@ export function renderThoughtGroups(sentence, callbacks) {
     chip.setAttribute('data-sentence-id', sentence.sentenceId);
     chip.setAttribute('data-group-id', group.groupId);
 
-    // Chip text
+    // Chip text — bold focus words
     const chipText = document.createElement('span');
     chipText.className = 'tg-chip-text';
-    chipText.textContent = group.text;
+    chipText.innerHTML = renderTextWithFocus(group.text, group.focusWord ?? group.focus_word ?? group.focus ?? null);
     chip.appendChild(chipText);
 
-    // Pitch movement label inside chip
-    const pm = group.pitchMovement;
-    if (pm?.label) {
-      const chipLabel = document.createElement('span');
-      const rawLabel  = pm.label.toLowerCase();
-      const cssClass  = rawLabel === 'rising'  ? 'pm-rising'
-                      : rawLabel === 'falling' ? 'pm-falling'
-                      : rawLabel === 'level'   ? 'pm-level'
-                      : 'pm-other';
-      const icon      = rawLabel.includes('rising')  ? '↑'
-                      : rawLabel.includes('falling') ? '↓'
-                      : '—';
-      chipLabel.className = `tg-chip-label ${cssClass}`;
-      chipLabel.textContent = `${icon} ${pm.label}`;
-      chip.appendChild(chipLabel);
-    }
 
-    chip.addEventListener('click', () => {
-      callbacks.onChipClick(sentence.sentenceId, group.groupId);
-    });
+    chip.addEventListener('click', () => callbacks.onChipClick(sentence.sentenceId, group.groupId));
     chip.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        callbacks.onChipClick(sentence.sentenceId, group.groupId);
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); callbacks.onChipClick(sentence.sentenceId, group.groupId); }
     });
-    chip.addEventListener('animationend', () => {
-      chip.classList.remove('is-pulsing');
-    });
+    chip.addEventListener('animationend', () => chip.classList.remove('is-pulsing'));
 
-    // Tooltip
-    const tooltip = buildTooltip(group);
+    // Compact analysis tooltip (replaces old verbose tooltip)
+    const tooltip = buildAnalysisTooltip(group);
     wrap.appendChild(chip);
     wrap.appendChild(tooltip);
     row.appendChild(wrap);
@@ -312,6 +394,87 @@ export function renderThoughtGroups(sentence, callbacks) {
 
   top.appendChild(row);
   return top;
+}
+
+/* ── Focus word bolding ───────────────────────────────────────── */
+function renderTextWithFocus(text, focusWord) {
+  if (!focusWord) return escapeHtml(text);
+  // Case-insensitive match of focus word in text
+  const escaped = escapeHtml(text);
+  const escapedFocus = escapeHtml(focusWord);
+  const regex = new RegExp(`(${escapedFocus.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'i');
+  return escaped.replace(regex, '<strong class="focus-word">$1</strong>');
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Format a pitch label string with icon ────────────────────── */
+function formatPitchLabel(raw) {
+  if (!raw) return null;
+  const s = raw.toLowerCase();
+  const icon = s.includes('rising')  ? '↑'
+             : s.includes('falling') ? '↓'
+             : '—';
+  return `${icon} ${raw}`;
+}
+
+function directionFromLabel(raw) {
+  const s = (raw ?? '').toLowerCase();
+  if (s.includes('rising'))  return 'rising';
+  if (s.includes('falling')) return 'falling';
+  return 'level';
+}
+
+/* ── Analysis tooltip: Start / Focus / End ────────────────────── */
+function buildAnalysisTooltip(group) {
+  const tooltip = document.createElement('div');
+  tooltip.className = 'tg-tooltip';
+  tooltip.setAttribute('role', 'tooltip');
+
+  // START — only shown if group.startLabel is explicitly set in JSON
+  const startFormatted = formatPitchLabel(group.startLabel ?? null);
+  if (startFormatted) {
+    tooltip.appendChild(buildAnalysisRow(ANALYSIS_LABELS.start, startFormatted));
+  }
+
+  // FOCUS — group.focusWord (resolved from pitchMovement.focus or top-level focus)
+  const focusWord = group.focusWord ?? null;
+  if (focusWord) {
+    tooltip.appendChild(buildAnalysisRow(ANALYSIS_LABELS.focus, focusWord));
+  }
+
+  // END — only shown if group.endLabel is explicitly set in JSON
+  const endFormatted = formatPitchLabel(group.endLabel ?? null);
+  if (endFormatted) {
+    tooltip.appendChild(buildAnalysisRow(ANALYSIS_LABELS.end, endFormatted));
+  }
+
+  // REASON — from JSON reason field
+  const reason = group.reason ?? group.llm_reason ?? null;
+  if (reason) {
+    const reasonEl = document.createElement('div');
+    reasonEl.className = 'tg-tooltip-reason';
+    reasonEl.textContent = reason;
+    tooltip.appendChild(reasonEl);
+  } else {
+    // Fallback: generic description based on pitchMovement.label
+    const dir = directionFromLabel(group.pitchMovement?.label);
+    const descEl = document.createElement('div');
+    descEl.className = 'tg-tooltip-reason';
+    descEl.textContent = PITCH_TOOLTIPS[dir] ?? '';
+    tooltip.appendChild(descEl);
+  }
+
+  return tooltip;
+}
+
+function buildAnalysisRow(label, value) {
+  const row = document.createElement('div');
+  row.className = 'tg-analysis-row';
+  row.innerHTML = `<span class="tg-analysis-key">${label}:</span><span class="tg-analysis-val">${escapeHtml(value)}</span>`;
+  return row;
 }
 
 /* ── Contour SVG ──────────────────────────────────────────────── */
@@ -325,20 +488,17 @@ export function renderContour(sentence, uiOptions) {
   const sid = sentence.sentenceId;
 
   const svg = svgEl('svg', {
-    class:       'contour-svg',
-    viewBox:     `0 0 ${L.viewBoxW} ${L.viewBoxH}`,
+    class:        'contour-svg',
+    viewBox:      `0 0 ${L.viewBoxW} ${L.viewBoxH}`,
     'aria-label': `Pitch contour for sentence ${sentence.badge || sentence.order}`,
   });
 
-  // ── defs: arrowhead markers only (no clipPath — using dashoffset reveal) ──
   const defs = svgEl('defs');
-  const markerUp = buildArrowMarker(`au-${sid}`, 'up',   '#e07b00');
-  const markerDn = buildArrowMarker(`ad-${sid}`, 'down', '#1a6b36');
-  defs.appendChild(markerUp);
-  defs.appendChild(markerDn);
+  defs.appendChild(buildArrowMarker(`au-${sid}`, 'up',   '#e07b00'));
+  defs.appendChild(buildArrowMarker(`ad-${sid}`, 'down', '#1a6b36'));
   svg.appendChild(defs);
 
-  // ── horizontal guide lines ──
+  // Guide lines
   for (const y of [L.guideYHi, L.guideYMi, L.guideYLo]) {
     svg.appendChild(svgEl('line', {
       x1: String(L.innerLeft - 2), y1: String(y),
@@ -347,39 +507,28 @@ export function renderContour(sentence, uiOptions) {
     }));
   }
 
-  // ── Hi / Mi / Lo labels ──
+  // Guide labels
   const guideLabels = ['Hi', 'Mi', 'Lo'];
   [L.guideYHi, L.guideYMi, L.guideYLo].forEach((y, i) => {
-    const t = svgEl('text', {
-      x: '4', y: String(y + 4),
-      'font-size': '8',
-      fill: '#ccc9be',
-      'font-family': 'inherit',
-    });
+    const t = svgEl('text', { x: '4', y: String(y + 4), 'font-size': '8', fill: '#ccc9be', 'font-family': 'inherit' });
     t.textContent = guideLabels[i];
     svg.appendChild(t);
   });
 
-  // ── Per-group: segment, divider, labels ──
   groups.forEach((group, idx) => {
     const { x1, x2, midX } = getGroupSegmentX(idx, n);
-    const colors  = getColorForMovement(group.pitchMovement?.label);
+    const colors   = getColorForMovement(group.pitchMovement?.label);
     const strategy = resolveContourStrategy(group.pitchMovement);
 
-    // vertical dashed divider before this group (not before the first)
     if (idx > 0) {
       svg.appendChild(svgEl('line', {
-        id:                `div-${sid}-${idx}`,
-        x1: String(x1), y1: '8',
-        x2: String(x1), y2: '100',
-        stroke: '#e0ded6',
-        'stroke-width':    '0.5',
-        'stroke-dasharray':'3 4',
-        style:             'opacity:0;transition:opacity 0.28s',
+        id: `div-${sid}-${idx}`,
+        x1: String(x1), y1: '8', x2: String(x1), y2: '100',
+        stroke: '#e0ded6', 'stroke-width': '0.5', 'stroke-dasharray': '3 4',
+        style: 'opacity:0;transition:opacity 0.28s',
       }));
     }
 
-    // contour segment — dashoffset reveal (no clipPath needed)
     if (strategy?.type === 'polyline' && strategy.pts?.length >= 2) {
       const segW   = x2 - x1;
       const svgPts = strategy.pts.map(p => ({
@@ -389,120 +538,68 @@ export function renderContour(sentence, uiOptions) {
       }));
 
       const pointsStr = svgPts.map(p => `${p.px},${p.py}`).join(' ');
-
-      // Estimate path length from point distances (good enough for dashoffset)
       let pathLen = 0;
       for (let i = 1; i < svgPts.length; i++) {
         const dx = svgPts[i].px - svgPts[i-1].px;
         const dy = svgPts[i].py - svgPts[i-1].py;
         pathLen += Math.sqrt(dx*dx + dy*dy);
       }
-      pathLen = Math.ceil(pathLen) + 2; // small buffer
+      pathLen = Math.ceil(pathLen) + 2;
 
       const polyline = svgEl('polyline', {
-        id:                `line-${sid}-${idx}`,
-        points:            pointsStr,
-        fill:              'none',
-        stroke:            colors.stroke,
-        'stroke-width':    '3.5',
-        'stroke-linecap':  'round',
-        'stroke-linejoin': 'round',
-        'stroke-dasharray':  String(pathLen),
-        'stroke-dashoffset': String(pathLen), // fully hidden initially
+        id: `line-${sid}-${idx}`, points: pointsStr,
+        fill: 'none', stroke: colors.stroke, 'stroke-width': '3.5',
+        'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+        'stroke-dasharray': String(pathLen), 'stroke-dashoffset': String(pathLen),
       });
       polyline.dataset.pathLen = pathLen;
       svg.appendChild(polyline);
 
-      // End-point circle — hidden initially, revealed when group completes
       const last = svgPts[svgPts.length - 1];
-      const endCircle = svgEl('circle', {
-        id:             `dot-end-${sid}-${idx}`,
+      svg.appendChild(svgEl('circle', {
+        id: `dot-end-${sid}-${idx}`,
         cx: String(last.px), cy: String(last.py),
-        r: '4.5', fill: '#fff',
-        stroke: colors.stroke, 'stroke-width': '2',
-        opacity: '0',
-      });
-      svg.appendChild(endCircle);
+        r: '4.5', fill: '#fff', stroke: colors.stroke, 'stroke-width': '2', opacity: '0',
+      }));
 
-      // Interior mid-point dots — hidden initially
       if (svgPts.length > 2) {
         svgPts.slice(1, -1).forEach((p, midI) => {
           svg.appendChild(svgEl('circle', {
-            id:      `dot-mid-${sid}-${idx}-${midI}`,
+            id: `dot-mid-${sid}-${idx}-${midI}`,
             cx: String(p.px), cy: String(p.py),
-            r: '3', fill: '#fff',
-            stroke: colors.stroke, 'stroke-width': '1.5',
-            opacity: '0',
+            r: '3', fill: '#fff', stroke: colors.stroke, 'stroke-width': '1.5', opacity: '0',
           }));
         });
       }
     }
 
-    // movement labels (Rising / Level / Falling)
+    // Movement labels (Rising / Falling / Level)
     if (uiOptions?.showMovementLabels) {
-      const labelG = svgEl('g', {
-        id:    `lbl-${sid}-${idx}`,
-        style: 'opacity:0;transition:opacity 0.55s',
-      });
-
+      const labelG = svgEl('g', { id: `lbl-${sid}-${idx}`, style: 'opacity:0;transition:opacity 0.55s' });
       const movLabel = (group.pitchMovement?.label || '').toLowerCase();
 
       if (strategy?.type === 'polyline' && strategy.pts?.length >= 2) {
-        const midPy = strategy.pts.reduce((sum, p) => sum + normalizeYToPixel(p.y), 0)
-                      / strategy.pts.length;
+        const midPy = strategy.pts.reduce((sum, p) => sum + normalizeYToPixel(p.y), 0) / strategy.pts.length;
 
-        if (movLabel === 'rising') {
-          labelG.appendChild(svgEl('line', {
-            x1: String(midX), y1: String(midPy + 14),
-            x2: String(midX), y2: String(midPy - 2),
-            stroke: colors.text, 'stroke-width': '1.2',
-            'marker-end': `url(#au-${sid})`,
-          }));
-          const t = svgEl('text', {
-            x: String(midX + 8), y: String(midPy + 10),
-            'font-size': '10.5', 'font-weight': '600',
-            fill: colors.text, 'font-family': 'inherit',
-          });
-          t.textContent = 'Rising';
-          labelG.appendChild(t);
-        } else if (movLabel === 'falling') {
-          labelG.appendChild(svgEl('line', {
-            x1: String(midX), y1: String(midPy - 14),
-            x2: String(midX), y2: String(midPy),
-            stroke: colors.text, 'stroke-width': '1.2',
-            'marker-end': `url(#ad-${sid})`,
-          }));
-          const t = svgEl('text', {
-            x: String(midX + 8), y: String(midPy - 4),
-            'font-size': '10.5', 'font-weight': '600',
-            fill: colors.text, 'font-family': 'inherit',
-          });
-          t.textContent = 'Falling';
-          labelG.appendChild(t);
+        if (movLabel.includes('rising')) {
+          labelG.appendChild(svgEl('line', { x1: String(midX), y1: String(midPy + 14), x2: String(midX), y2: String(midPy - 2), stroke: colors.text, 'stroke-width': '1.2', 'marker-end': `url(#au-${sid})` }));
+          const t = svgEl('text', { x: String(midX + 8), y: String(midPy + 10), 'font-size': '10.5', 'font-weight': '600', fill: colors.text, 'font-family': 'inherit' });
+          t.textContent = 'Rising'; labelG.appendChild(t);
+        } else if (movLabel.includes('falling')) {
+          labelG.appendChild(svgEl('line', { x1: String(midX), y1: String(midPy - 14), x2: String(midX), y2: String(midPy), stroke: colors.text, 'stroke-width': '1.2', 'marker-end': `url(#ad-${sid})` }));
+          const t = svgEl('text', { x: String(midX + 8), y: String(midPy - 4), 'font-size': '10.5', 'font-weight': '600', fill: colors.text, 'font-family': 'inherit' });
+          t.textContent = 'Falling'; labelG.appendChild(t);
         } else {
-          const t = svgEl('text', {
-            x: String(midX), y: String(L.guideYHi - 6),
-            'text-anchor': 'middle',
-            'font-size': '10', 'font-weight': '500',
-            fill: colors.text, 'font-family': 'inherit',
-          });
+          const t = svgEl('text', { x: String(midX), y: String(L.guideYHi - 6), 'text-anchor': 'middle', 'font-size': '10', 'font-weight': '500', fill: colors.text, 'font-family': 'inherit' });
           t.textContent = movLabel.charAt(0).toUpperCase() + movLabel.slice(1) || 'Level';
           labelG.appendChild(t);
         }
       }
-
       svg.appendChild(labelG);
     }
 
-    // group label at bottom
     if (uiOptions?.showGroupLabels) {
-      const t = svgEl('text', {
-        x: String(midX), y: String(L.viewBoxH - 2),
-        'text-anchor': 'middle',
-        'font-size': '9',
-        fill: '#ccc9be',
-        'font-family': 'inherit',
-      });
+      const t = svgEl('text', { x: String(midX), y: String(L.viewBoxH - 2), 'text-anchor': 'middle', 'font-size': '9', fill: '#ccc9be', 'font-family': 'inherit' });
       t.textContent = `group ${idx + 1}`;
       svg.appendChild(t);
     }
@@ -521,47 +618,23 @@ function renderLegend() {
   LEGEND.forEach(item => {
     const li = document.createElement('div');
     li.className = 'legend-item';
-
-    if (item.type === 'swatch') {
-      li.innerHTML =
-        `<div class="legend-swatch" style="background:${item.color}"></div>` +
-        `<span>${item.label}</span>`;
+    if (item.type === 'focus-word') {
+      li.innerHTML = `<div class="legend-focus-icon"><strong>A</strong></div><span class="legend-focus-label">${item.label}</span>`;
     } else if (item.type === 'box') {
-      li.innerHTML =
-        `<div class="legend-box"></div>` +
-        `<span>${item.label}</span>`;
+      li.innerHTML = `<div class="legend-box"></div><span>${item.label}</span>`;
     } else if (item.type === 'click') {
-      li.innerHTML =
-        `<div class="legend-click"><div class="legend-click-tri"></div></div>` +
-        `<span>${item.label}</span>`;
+      li.innerHTML = `<div class="legend-click"><div class="legend-click-tri"></div></div><span>${item.label}</span>`;
     }
-
     legend.appendChild(li);
   });
 
   return legend;
 }
 
-/* ── Arrow marker helper ──────────────────────────────────────── */
+/* ── Arrow marker ─────────────────────────────────────────────── */
 function buildArrowMarker(id, dir, color) {
   const isUp = dir === 'up';
-  const m = svgEl('marker', {
-    id,
-    viewBox:      '0 0 10 10',
-    refX:         '5',
-    refY:         isUp ? '9' : '1',
-    markerWidth:  '5',
-    markerHeight: '5',
-    orient:       'auto',
-  });
-  const p = svgEl('path', {
-    d:               isUp ? 'M1 8L5 1L9 8' : 'M1 2L5 9L9 2',
-    fill:            'none',
-    stroke:          color,
-    'stroke-width':  '1.8',
-    'stroke-linecap':'round',
-    'stroke-linejoin':'round',
-  });
-  m.appendChild(p);
+  const m = svgEl('marker', { id, viewBox: '0 0 10 10', refX: '5', refY: isUp ? '9' : '1', markerWidth: '5', markerHeight: '5', orient: 'auto' });
+  m.appendChild(svgEl('path', { d: isUp ? 'M1 8L5 1L9 8' : 'M1 2L5 9L9 2', fill: 'none', stroke: color, 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }));
   return m;
 }
