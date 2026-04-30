@@ -16,8 +16,10 @@
             "duration": 0.62
           },
           "pitchMovement": {
-            "label": "rising",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even as you move to the next idea.",
+            "startLabel": "level",
+            "endLabel":   "falling",
+            "focus": "now",
+            "reason": "This short opening announces the next action and prepares listeners for what is coming. A steady start with a fall on 'now' makes the setup sound clear and intentional.",
             "points": [
               {
                 "role": "start",
@@ -28,7 +30,13 @@
                 "role": "end",
                 "x": 1.0,
                 "y": 0.068
+              },
+              {
+                "role": "peak",
+                "x": 0.6,
+                "y": 0.635
               }
+
             ]
           }
         },
@@ -41,18 +49,25 @@
             "duration": 1.621
           },
           "pitchMovement": {
-            "label": "rising",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even as you introduce the questions.",
+            "startLabel": "rising",
+            "endLabel":   "falling",
+            "focus": "questions",
+            "reason": "This group introduces the main action, and 'questions' carries the key information near the end. The falling finish makes the announcement sound clear and complete.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.516
+                "y": 0.635
               },
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.245
+                "y": 0.068
+              },
+              {
+                "role": "peak",
+                "x": 0.6,
+                "y": 0.635
               }
             ]
           }
@@ -60,24 +75,26 @@
         {
           "groupId": "s1-g3",
           "index": 2,
-          "text": "to which",
+          "text": "to which I would love to have",
           "audio": {
             "src": "segments/s1-g3.wav",
-            "duration": 0.64
+            "duration": 1.481
           },
           "pitchMovement": {
-            "label": "level",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice smooth as you connect to the next idea.",
+            "startLabel": "level",
+            "endLabel":   "level",
+            "focus": "",
+            "reason": "This group works as a bridge into the expected response, so it should stay relatively even. The level ending keeps the message open and connected to the next thought.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.624
+                "y": 0.642
               },
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.616
+                "y": 0.847
               }
             ]
           }
@@ -85,24 +102,31 @@
         {
           "groupId": "s1-g4",
           "index": 3,
-          "text": "I would love to have a",
+          "text": "a very honest answer",
           "audio": {
             "src": "segments/s1-g4.wav",
-            "duration": 0.841
+            "duration": 1.341
           },
           "pitchMovement": {
-            "label": "falling",
-            "reason": "The voice falls at the end, which makes the idea sound complete and clear. Let your voice come down on 'have a' to signal this part is finished.",
+            "startLabel": "level",
+            "endLabel":   "rising",
+            "focus": "answer",
+            "reason": "This group highlights 'answer' as the important word while still leading forward to the method that follows. The rising ending keeps the audience waiting for the completion of the idea.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.636
+                "y": 0.847
+              },
+              {
+                "role": "peak",
+                "x": 0.456,
+                "y": 0.847
               },
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.927
+                "y": 0.035
               }
             ]
           }
@@ -110,49 +134,21 @@
         {
           "groupId": "s1-g5",
           "index": 4,
-          "text": "very honest answer",
-          "audio": {
-            "src": "segments/s1-g5.wav",
-            "duration": 1.261
-          },
-          "pitchMovement": {
-            "label": "level",
-            "reason": "The voice stays fairly level at the end, making the phrase sound steady and neutral. Let your pitch flow smoothly without forcing a strong rise or fall.",
-            "points": [
-              {
-                "role": "start",
-                "x": 0.0,
-                "y": 0.833
-              },
-              {
-                "role": "peak",
-                "x": 0.302,
-                "y": 0.035
-              },
-              {
-                "role": "end",
-                "x": 1.0,
-                "y": 0.441
-              }
-            ]
-          }
-        },
-        {
-          "groupId": "s1-g6",
-          "index": 5,
           "text": "just by a show of hands.",
           "audio": {
-            "src": "segments/s1-g6.wav",
+            "src": "segments/s1-g5.wav",
             "duration": 1.481
           },
           "pitchMovement": {
-            "label": "falling",
-            "reason": "The voice falls at the end, which makes the idea sound complete and clear. Let your voice come down on 'hands' to signal you're done.",
+            "startLabel": "falling",
+            "endLabel":   "falling",
+            
+            "reason": "This final group tells people exactly how to respond. The falling ending on 'hands' closes the instruction and sounds certain.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.145
+                "y": 0.035
               },
               {
                 "role": "end",
@@ -177,8 +173,10 @@
             "duration": 0.58
           },
           "pitchMovement": {
-            "label": "rising",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even to sound calm and connect smoothly to the next part.",
+            "startLabel": "start with rising",
+            "endLabel":"end with rising",
+            "focus": "worries",
+            "reason": "This phrase is meant to reassure the audience before the fuller explanation comes. A rising ending keeps the tone friendly and open rather than final.",
             "points": [
               {
                 "role": "start",
@@ -196,24 +194,29 @@
         {
           "groupId": "s2-g2",
           "index": 1,
-          "text": "no one will judge you",
+          "text": "no one will judge",
           "audio": {
             "src": "segments/s2-g2.wav",
-            "duration": 0.801
+            "duration": 0.681
           },
           "pitchMovement": {
-            "label": "level",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even to connect smoothly to the next idea.",
+            "startLabel": "level",
+            "endLabel":"falling",
+            "focus" : "judge",
+            "reason": "This group gives the main reassurance, and 'judge' carries the key meaning near the end. The falling ending makes the statement sound confident and trustworthy.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.7
+                "y": 0.48
               },
+              {"role":"peak",
+            "x":0.585,
+          "y":0.48},
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.876
+                "y": 0.7
               }
             ]
           }
@@ -221,24 +224,26 @@
         {
           "groupId": "s2-g3",
           "index": 2,
-          "text": "for it.",
+          "text": "you for it.",
           "audio": {
             "src": "segments/s2-g3.wav",
-            "duration": 0.34
+            "duration": 0.48
           },
           "pitchMovement": {
-            "label": "level",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice calm and even to sound reassuring.",
+            "star1label": "falling",
+            "endLabel": "falling",
+            "reason": "This short closing completes the reassurance as one finished message. The falling ending helps the whole sentence sound settled and final.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.9
+                "y": 0.7
               },
+              
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.9
+                "y": 1
               }
             ]
           }
@@ -258,8 +263,10 @@
             "duration": 0.8
           },
           "pitchMovement": {
-            "label": "level",
-            "reason": "The voice stays fairly level at the end, making this sound like a clear introduction to the next idea. Let your pitch change slightly inside the group to highlight 'first'.",
+            "startLabel": "rising",
+            "endLabel": " level",
+            "focus": "question",
+            "reason": "This group introduces a new topic, so it deserves some prominence at the start. Keeping the end relatively level helps it lead smoothly into the actual question.",
             "points": [
               {
                 "role": "start",
@@ -269,12 +276,12 @@
               {
                 "role": "peak",
                 "x": 0.312,
-                "y": 0.0
+                "y": 0.2
               },
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.223
+                "y": 0.2
               }
             ]
           }
@@ -288,13 +295,13 @@
             "duration": 0.16
           },
           "pitchMovement": {
-            "label": "level",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. This helps connect smoothly to the next part of the question.",
+            "endLabel": "level",
+            "reason": "This tiny linking group simply opens the next part of the question. A level ending keeps it connected instead of sounding complete.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.349
+                "y": 0.2
               },
               {
                 "role": "end",
@@ -313,18 +320,18 @@
             "duration": 0.68
           },
           "pitchMovement": {
-            "label": "falling",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even as you ask this part of the question.",
+            "endLabel": "falling",
+            "reason": "This group points directly to the listeners, but it is still only the beginning of the full question. The contour should keep the audience listening for the rest of the message.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.0
+                "y": 0.391
               },
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.941
+                "y": 0.717
               }
             ]
           }
@@ -338,8 +345,10 @@
             "duration": 0.76
           },
           "pitchMovement": {
-            "label": "falling",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even here to connect smoothly to the next part.",
+            "startLabel":"rising",
+            "endLabel": "end with falling",
+            "focus": "thought",
+            "reason": "This group continues the question and gives mild emphasis to 'thought.' It should stay supportive in tone because the sentence is still building toward the real issue.",
             "points": [
               {
                 "role": "start",
@@ -363,13 +372,15 @@
             "duration": 1.321
           },
           "pitchMovement": {
-            "label": "level",
-            "reason": "The voice stays fairly level at the end, so the phrase sounds steady and leads into the next idea. Notice a slight pitch change inside the group to highlight the time frame.",
+            "startLabel":"start with rising",
+            "endLabel": "end with falling",
+            "focus": "week",
+            "reason": "This group narrows the meaning to a specific time frame, with 'week' as the key word near the end. The phrase should stand out slightly but still connect forward because the question is not finished yet.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.712
+                "y": 0.996
               },
               {
                 "role": "peak",
@@ -393,13 +404,15 @@
             "duration": 1.401
           },
           "pitchMovement": {
-            "label": "level",
-            "reason": "The voice stays fairly level at the end, so the phrase sounds steady and leads into the next idea. Notice a slight pitch change inside the group to keep it natural.",
+            "startLabel":"start with rising",
+            "endLabel": "end with falling",
+            "focus": "whether",
+            "reason": "This group introduces the central contrast and signals that an important judgment is coming next. The pitch change helps highlight 'whether or not' while keeping the message open.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.744
+                "y": 0.898
               },
               {
                 "role": "peak",
@@ -409,7 +422,7 @@
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.964
+                "y": 0.772
               }
             ]
           }
@@ -423,18 +436,19 @@
             "duration": 1.941
           },
           "pitchMovement": {
-            "label": "level",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even as you lead into the next idea.",
+            "startLabel": "level",
+            "endLabel":"level",
+            "reason": "This longer group carries setup information before the final key word arrives. A level ending keeps the contour steady so the strongest completion can land on 'person?'",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.872
+                "y": 0.772
               },
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.988
+                "y": 0.772
               }
             ]
           }
@@ -448,13 +462,13 @@
             "duration": 0.461
           },
           "pitchMovement": {
-            "label": "falling",
-            "reason": "The voice falls at the end, which makes the idea sound complete and clear.",
+            "endLabel": "falling",
+            "reason": "This is the final word of the question and the main point the audience must judge. The falling ending makes the question sound complete and direct.",
             "points": [
               {
                 "role": "start",
                 "x": 0.0,
-                "y": 0.879
+                "y": 0.772
               },
               {
                 "role": "end",
@@ -479,8 +493,10 @@
             "duration": 1.081
           },
           "pitchMovement": {
-            "label": "level",
-            "reason": "The ending stays fairly level, but there is a noticeable pitch change inside the group. This helps set up the question that follows, so keep your voice steady and clear.",
+            "startLabel": "rising",
+            "endLabel":"falling",
+            "focus":"think of",
+            "reason": "This phrase reopens the topic and asks listeners to reflect before answering. The pitch movement inside the group helps mark it as a new setup for the question that follows.",
             "points": [
               {
                 "role": "start",
@@ -495,7 +511,7 @@
               {
                 "role": "end",
                 "x": 1.0,
-                "y": 0.959
+                "y": 0.731
               }
             ]
           }
@@ -509,8 +525,9 @@
             "duration": 2.842
           },
           "pitchMovement": {
-            "label": "rising",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even to sound calm and open-ended.",
+            "startLabel": "rising",
+            "endLabel": "rising",
+            "reason": "This full question invites self-evaluation, so it should sound open rather than closed. A rising ending fits the PPT pattern for questions and leaves space for a response.",
             "points": [
               {
                 "role": "start",
@@ -526,69 +543,8 @@
           }
         }
       ]
-    },
-    {
-      "sentenceId": "s5",
-      "badge": "S5",
-      "groups": [
-        {
-          "groupId": "s5-g1",
-          "index": 0,
-          "text": "Please raise your hand",
-          "audio": {
-            "src": "segments/s5-g1.wav",
-            "duration": 0.84
-          },
-          "pitchMovement": {
-            "label": "level",
-            "reason": "The ending stays fairly level, but there is a noticeable pitch change inside the group. This helps highlight the request while keeping it polite and connected to what follows.",
-            "points": [
-              {
-                "role": "start",
-                "x": 0.0,
-                "y": 0.447
-              },
-              {
-                "role": "trough",
-                "x": 0.585,
-                "y": 1.0
-              },
-              {
-                "role": "end",
-                "x": 1.0,
-                "y": 0.987
-              }
-            ]
-          }
-        },
-        {
-          "groupId": "s5-g2",
-          "index": 1,
-          "text": "if you do so.",
-          "audio": {
-            "src": "segments/s5-g2.wav",
-            "duration": 4.923
-          },
-          "pitchMovement": {
-            "label": "level",
-            "reason": "The ending stays fairly level, so the phrase sounds steady and neutral. Keep your voice even to signal a calm, complete thought.",
-            "points": [
-              {
-                "role": "start",
-                "x": 0.0,
-                "y": 0.444
-              },
-              {
-                "role": "end",
-                "x": 1.0,
-                "y": 0.649
-              }
-            ]
-          }
-        }
-      ]
     }
    
-    
+     
   ]
 }
